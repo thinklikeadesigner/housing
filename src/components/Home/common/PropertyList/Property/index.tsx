@@ -4,10 +4,8 @@ import UnitList from '../../UnitList';
 type Props =  { id: string; name: string; picture: string; units: { type: string; minOccupancy: number; maxOccupancy: number; sqft: number; amenities: string[]; }[]; }
 
 function Property(i: Props) {
-	return <div key={i.id}>
-		<div>
-			<h1>{i.name}</h1>
-		</div>
+	return <div  key={i.id}>
+		<div><h1>{i.name}</h1></div>
 		<UnitList id={i.id} name={i.name} picture={i.picture} units={i.units} />
 	</div>;
 }

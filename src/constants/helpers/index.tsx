@@ -8,6 +8,11 @@ const getAmenities = (housingdata:any) => {
 	return amenitiesCheckBoxes;
 };
 
+function getRoomTypes(property: { units: any[]; }) {
+	const roomTypes = new Set(property.units.map(i => i.type));
+	return roomTypes;
+}
+
 
 const sampleProperties = data;
 const singleProperty = sampleProperties[0];
@@ -51,4 +56,4 @@ const amenitiesCheckBoxes = getAmenities(data);
 
 
 
-export { amenitiesCheckBoxes, data, getUnitsByType, getUnitsMinMax, getAvgSqft};
+export { amenitiesCheckBoxes, data, getUnitsByType, getUnitsMinMax, getAvgSqft, getRoomTypes};

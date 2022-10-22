@@ -10,7 +10,7 @@ Thanks again for taking the time to chat with us. Based on that, we'd like to in
 
 The product this hire will primarily be working on is an open source web application which helps people learn about and apply for affordable housing listings. Taking inspiration from that project, the goal of this take-home is to build a single page application using React to display this listing data.
 
-✅ We highly recommend using `Create React App` with `Typescript` to get started which will set up a basic project for you.
+ We highly recommend using `Create React App` with `Typescript` to get started which will set up a basic project for you.
 
 You might find adding the json-loader package to be useful as well. We have attached a basic design mock which serves as a general idea of how you might choose to visually organize the data we are asking for - you do not have to follow it exactly.
 

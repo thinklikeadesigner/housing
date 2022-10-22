@@ -21,7 +21,6 @@ function App() {
 
 	return (
 		<div className="App">
-			{data.map((i: { name: any; }) => i.name)}
 			{amenities.map((amenity: any, index: any) => (
 				<CheckBox
 					key={index}
@@ -31,7 +30,6 @@ function App() {
 					index={index}
 				/>
 			))}
-			<pre>{JSON.stringify(amenities, null, 2)}</pre>
 			<PropertyList/>
 		</div>
 	);
