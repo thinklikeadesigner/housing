@@ -1,5 +1,5 @@
 import React from 'react';
-import { getAvgSqft, getUnitsByType, getUnitsMinMax } from '../../../../constants/helpers';
+import { getAvgSqft, getUnitsByType, getUnitsMinMax } from '../helpers';
 
 type Props = { id: string; name: string; picture: string; units: { type: string; minOccupancy: number; maxOccupancy: number; sqft: number; amenities: string[]; }[]; };
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import CheckBox from './components/Home/common/CheckBox';
-import PropertyList from './components/Home/common/PropertyList';
-import  { amenitiesCheckBoxes, data} from './constants/helpers/index';
+import CheckBox from './components/CheckBox';
+import PropertyList from './components/PropertyList';
+import  { amenitiesCheckBoxes, data} from './components/helpers/index';
 
 
 function App() {
