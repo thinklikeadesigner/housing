@@ -1,4 +1,3 @@
-import data from '../../@types/data';
 
 export const getAmenities = (housingdata:any) => {
 	const amenitiesCheckBoxes: any = [];
@@ -33,5 +32,3 @@ export const getAvgSqft = (units: any) => {
 };
 
 
-
-export const amenitiesList = getAmenities(data);

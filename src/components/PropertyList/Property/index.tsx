@@ -5,7 +5,9 @@ type Props =  { id: string; name: string; picture: string; units: { type: string
 
 function Property(i: Props) {
 	return <div  key={i.id}>
-		<div><h1>{i.name}</h1></div>
+		<div>
+			<h1>{i.name}</h1><img src={i.picture} alt="house" />
+		</div>
 		<UnitList id={i.id} name={i.name} picture={i.picture} units={i.units} />
 	</div>;
 }
