@@ -4,7 +4,7 @@ import UnitList from '../../UnitList';
 type Props =  { id: string; name: string; picture: string; units: { type: string; minOccupancy: number; maxOccupancy: number; sqft: number; amenities: string[]; }[]; }
 
 function Property(i: Props) {
-	return <div  key={i.id}>
+	return <div  key={i.id} style={{display: 'flex'}}>
 		<div>
 			<h1>{i.name}</h1><img src={i.picture} alt="house" />
 		</div>

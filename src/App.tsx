@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
-import DropDownContainer from './components/DropDownContainer';
-import PropertyList from './components/PropertyList';
 import data from './mockData.json';
 import { PropertyContext } from './context/PropertyContext/index';
 import Home from './pages/Home';
+import { AmenityContext } from './context/AmenityContext';
+import { getAmenities } from './components/helpers/index';
 
 
 function App() {
 
 
 	const [properties, setProperties] = useState<any>(data);
+	const amenities = getAmenities(data);
 	
 	
 
 	return (
 		<div className="App">
 			<PropertyContext.Provider value={properties}>
-				<Home/>
+				<AmenityContext.Provider value={amenities}>
+					<Home/>
+				</AmenityContext.Provider>
 			</PropertyContext.Provider>
 		</div>
 	);

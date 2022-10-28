@@ -2,23 +2,17 @@ import React, { useContext, useState } from 'react';
 import CheckBox from '../CheckBox';
 import { PropertyContext } from '../../context/PropertyContext';
 import { getAmenities } from '../helpers';
+import { AmenityContext } from '../../context/AmenityContext';
 
 
 
-const DropDownContainer = () => {
+const DropDownContainer = ({amenities, updateCheckStatus}: any) => {
 
-	const properties = useContext(PropertyContext);
-	const list = getAmenities(properties);
-	const [amenities, setAmenities] = useState(list);
+
 	
   
 
-	const updateCheckStatus = (index: number) => {
-		setAmenities(
-			amenities.map((amenity: any, currentIndex: any) => currentIndex === index ? { ...amenity, checked: !amenity.checked } : amenity
-			)
-		);
-	};
+
 
 	return <div>
 		{amenities.map((amenity: any, index: any) => (

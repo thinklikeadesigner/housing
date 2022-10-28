@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { getAvgSqft, getUnitsByType, getUnitsMinMax } from '../helpers';
 import './styles.css';
 type Props = { id: string; name: string; picture: string; units: { type: string; minOccupancy: number; maxOccupancy: number; sqft: number; amenities: string[]; }[]; };
@@ -7,148 +7,107 @@ type Props = { id: string; name: string; picture: string; units: { type: string;
 function UnitList(i: Props) {
 
 
-	const noUnitsAvailable = (unitType: any) => Object.keys(getUnitsByType(i, unitType)).length === 0;
+	const noUnitsAvailable = (unitType: string) => Object.keys(getUnitsByType(i, unitType)).length === 0;
 	const minOccupancy  = (unitType: string) =>` ${getUnitsMinMax(getUnitsByType(i, unitType)).minOcc}`;
 	const avgSqFt  = (unitType: string) =>` ${Math.floor(getAvgSqft(getUnitsByType(i, unitType)))}`;
 	const maxOccupancy  = (unitType: string) =>` ${getUnitsMinMax(getUnitsByType(i, unitType)).maxOcc}`;
 
-	return <div>
-		{noUnitsAvailable('studio') ? 'no studio units available' : <div className="unit-wrap" >
-			<table>
-				<tr>
+	return <table>
+		<thead>
 
-					<th>Unit Type</th>
-					<th>Average Square Footage</th>
-					<th>Range</th>
-				</tr>
-				<tr>
-					<td>
-						<h4>Studio</h4>
-					</td>
-					<td>	<p>Average Square Footage
-						{avgSqFt('studio')}
-					</p>
-					</td>
-					<td><p>min
-						{minOccupancy('studio')}
-					</p>
-					</td>
-					<td><p>max
-						{maxOccupancy('studio')}
-					</p></td>
-				</tr>
+			<tr>
+				<th>Unit Type</th>
+				<th>Average Square Footage</th>
+				<th>Range</th>
+			</tr>
+		</thead>
+		<tbody>
 
-			</table>
-		</div>
-		}
+			{noUnitsAvailable('studio') ? null : <tr style={{backgroundColor: 'gray'}}>
 
-		{noUnitsAvailable('oneBdrm') ? 'no oneBdrm units available' : <div className="unit-wrap" >
-			<table>
-				<tr>
+				<td >
+					<h4>Studio</h4>
+				</td>
+				<td>	<p>
+					{avgSqFt('studio')}
+				</p>
+				</td>
+				<td><p>
+					{minOccupancy('studio')} -
+					{maxOccupancy('studio')}
+				</p>
+				</td>
+			</tr>
 
-					<th>Unit Type</th>
-					<th>Average Square Footage</th>
-					<th>Range</th>
-				</tr>
-				<tr>
-					<td>
-						<h4>One Bedroom</h4>
-					</td>
-					<td>	<p>Average Square Footage
-						{avgSqFt('oneBdrm')}
-					</p>
-					</td>
-					<td><p>min
-						{minOccupancy('oneBdrm')}
-					</p>
-					</td>
-					<td><p>max
-						{maxOccupancy('oneBdrm')}
-					</p></td>
-				</tr>
+			}
 
-			</table></div>}
+			{noUnitsAvailable('oneBdrm') ? null : <tr style={{backgroundColor: 'gray'}} >
+		
+				<td>
+					<h4>One Bedroom</h4>
+				</td>
+				<td>	<p>
+					{avgSqFt('oneBdrm')}
+				</p>
+				</td>
+				<td><p>
+					{minOccupancy('oneBdrm')} -
+					{maxOccupancy('oneBdrm')}
+				</p>
+				<p>
+				</p></td>
 
-		{noUnitsAvailable('twoBdrm') ? 'no twoBdrm units available' : <div className="unit-wrap">
-			<table>
-				<tr>
+			</tr>}
 
-					<th>Unit Type</th>
-					<th>Average Square Footage</th>
-					<th>Range</th>
-				</tr>
-				<tr>
-					<td>
-						<h4>Two Bedroom</h4>
-					</td>
-					<td>	<p>Average Square Footage
-						{avgSqFt('twoBdrm')}
-					</p>
-					</td>
-					<td><p>min
-						{minOccupancy('twoBdrm')}
-					</p>
-					</td>
-					<td><p>max
+			{noUnitsAvailable('twoBdrm') ? null : <tr style={{backgroundColor: 'gray'}} >
+
+				<td>
+					<h4>Two Bedroom</h4>
+				</td>
+				<td>	<p>
+					{avgSqFt('twoBdrm')}
+				</p>
+				</td>
+				<td>
+					<p>
+						{minOccupancy('twoBdrm')} -
 						{maxOccupancy('twoBdrm')}
-					</p></td>
-				</tr>
-
-			</table></div>}
-		{noUnitsAvailable('threeBdrm') ? 'no threeBdrm units available' : <div className="unit-wrap">
-			<table>
-				<tr>
-
-					<th>Unit Type</th>
-					<th>Average Square Footage</th>
-					<th>Range</th>
-				</tr>
-				<tr>
-					<td>
-						<h4>Three Bedroom</h4>
-					</td>
-					<td>	<p>Average Square Footage
-						{avgSqFt('threeBdrm')}
 					</p>
-					</td>
-					<td><p>min
-						{minOccupancy('threeBdrm')}
-					</p>
-					</td>
-					<td><p>max
-						{maxOccupancy('threeBdrm')}
-					</p></td>
-				</tr>
+				</td>
 
-			</table></div>}
+			</tr>}
+			{noUnitsAvailable('threeBdrm') ? null : <tr style={{backgroundColor: 'gray'}}>
+	
+				<td>
+					<h4>Three Bedroom</h4>
+				</td>
+				<td>	<p className="unit-text">
+					{avgSqFt('threeBdrm')}
+				</p>
+				</td>
+				<td><p>
+					{minOccupancy('threeBdrm')} -
+					{maxOccupancy('threeBdrm')}
+				</p></td>
 
-		{noUnitsAvailable('fourBdrm') ? 'no fourBdrm units available' : <div className="unit-wrap">
-			<table>
-				<tr>
+			</tr>}
 
-					<th>Unit Type</th>
-					<th>Average Square Footage</th>
-					<th>Range</th>
-				</tr>
-				<tr>
-					<td>
-						<h4>Four Bedroom</h4>
-					</td>
-					<td>	<p>Average Square Footage
-						{avgSqFt('fourBdrm')}
-					</p>
-					</td>
-					<td><p>min
-						{minOccupancy('fourBdrm')}
-					</p>
-					</td>
-					<td><p>max
-						{maxOccupancy('fourBdrm')}
-					</p></td>
-				</tr>
-
-			</table></div>}
-	</div>;
+			{noUnitsAvailable('fourBdrm') ? null : <tr style={{backgroundColor: 'gray'}}>
+	
+				<td>
+					<h4>Four Bedroom</h4>
+				</td>
+				<td>	<p>
+					{avgSqFt('fourBdrm')}
+				</p>
+				</td>
+				<td><p >
+					{minOccupancy('fourBdrm')} - {maxOccupancy('fourBdrm')}
+				</p>
+				</td>
+			</tr>}
+		</tbody>
+	</table>;
 }
 
 export default UnitList;
