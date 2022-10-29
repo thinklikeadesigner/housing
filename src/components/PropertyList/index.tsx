@@ -1,17 +1,16 @@
 import React from 'react';
 import Property from './Property';
 
-const PropertyList = ({properties, }:any,) => {
+const PropertyList = ( { properties }: any ) => {
+
+	if (properties.length == 0) return <h1>no results</h1>;
 
 
+	
 
-
-	return <div >
-		{/* Cannot find name 'sortedList'.ts(2304) */}
-		{properties.map((i:any) => (
-			<div key={i.id}>
-				<Property id={i.id} name={i.name} picture={i.picture} units={i.units} />
-			</div>
+	return <div className="py-6 border-2 border-red-500">
+		{properties.map((i: any) => (
+			<Property key={i.id} id={i.id} name={i.name} picture={i.picture} units={i.units} />
 		))}
 	</div>;
 };

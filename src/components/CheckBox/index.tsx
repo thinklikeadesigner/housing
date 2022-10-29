@@ -16,7 +16,7 @@ const CheckBox = ({ isChecked, label, checkHandler, index }: Props) => {
 				checked={isChecked}
 				onChange={checkHandler}
 			/>
-			<label htmlFor={`checkbox-${index}`}>{label}</label>
+			<label className="ml-2" htmlFor={`checkbox-${index}`}>{label}</label>
 		</div>
 	);
 };

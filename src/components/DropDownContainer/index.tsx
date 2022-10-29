@@ -1,29 +1,42 @@
-import React, { useContext, useState } from 'react';
+/* eslint-disable react/jsx-key */
+import React, { cloneElement, useState } from 'react';
 import CheckBox from '../CheckBox';
-import { PropertyContext } from '../../context/PropertyContext';
-import { getAmenities } from '../helpers';
-import { AmenityContext } from '../../context/AmenityContext';
+import './styles.css';
 
 
-
-const DropDownContainer = ({amenities, updateCheckStatus}: any) => {
+const DropDownContainer = ({ title, children }: any) =>
+	<Dropdown trigger={<button> {title} </button>} menu={[children]} />;
 
 
 	
-  
+const Dropdown = ({ trigger, menu }:any) => {
+	const [open, setOpen] = useState(false);
 
+	const handleOpen = () => {
+		setOpen(!open);
+	};
 
-
-	return <div>
-		{amenities.map((amenity: any, index: any) => (
-			<CheckBox
-				key={index}
-				isChecked={amenity.checked}
-				checkHandler={() => updateCheckStatus(index)}
-				label={amenity.name}
-				index={index}
-			/>
-		))}</div>;
+	return (
+		<div className="p-5 border-2 border-red-500 dropdown">
+			{cloneElement(trigger, {
+				onClick: handleOpen,
+			})}
+			{open ? (
+				<ul className="menu">
+					{menu.map((menuItem: any, index: any) => (
+						<li key={index} className="menu-item">
+							{cloneElement(menuItem, {
+								onClick: () => {
+									menuItem.props.onClick();
+									setOpen(false);
+								},
+							})}
+						</li>
+					))}
+				</ul>
+			) : null}
+		</div>
+	);
 };
 
 export default DropDownContainer;

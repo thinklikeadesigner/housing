@@ -12,6 +12,21 @@ export const getAmenities = (housingdata:any) => {
 // 	return roomTypes;
 // }
 
+export const iterateObj = (obj: any, key: any, value: any) => {
+	for (const prop in obj) {
+		if (typeof (obj[prop]) == 'object') {
+			iterateObj(obj[prop], key, value);
+		} else {
+			if (prop == key) {
+				if (obj[prop] == value) {
+					console.log(obj);
+					return obj;
+				}
+			}
+		}
+	}
+};
+
 export const getUnitsByType = (property: any, unitType: any) => {
 	return   property.units.map((i: any) => i).filter((j: { type: any; }) => j.type === unitType);
 };

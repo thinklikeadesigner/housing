@@ -22,7 +22,7 @@ The goals for this assessment are:
   - the range of possible occupancy of that unit type ✅
 - create three inputs to filter the data
 
-  1) a text input on the property name
+  1) a text input on the property name ✅
 
   2) a dropdown input to filter on a unit amenity
 
