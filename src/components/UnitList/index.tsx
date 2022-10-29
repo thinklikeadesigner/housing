@@ -3,7 +3,7 @@ import { getAvgSqft, getUnitsByType, getUnitsMinMax } from '../helpers';
 import './styles.css';
 type Props = { id: string; name: string; picture: string; units: { type: string; minOccupancy: number; maxOccupancy: number; sqft: number; amenities: string[]; }[]; };
 
-// REFACTOR WOULD LOVE TO GET RID OF SOME DUPLICATE CODE HERE 
+// BUG min and max calculations are off
 function UnitList(i: Props) {
 
 
@@ -14,7 +14,6 @@ function UnitList(i: Props) {
 
 	return <table>
 		<thead>
-
 			<tr>
 				<th>Unit Type</th>
 				<th>Average Square Footage</th>
@@ -22,9 +21,7 @@ function UnitList(i: Props) {
 			</tr>
 		</thead>
 		<tbody>
-
 			{noUnitsAvailable('studio') ? null : <tr style={{backgroundColor: 'gray'}}>
-
 				<td >
 					<h4>Studio</h4>
 				</td>
@@ -38,9 +35,7 @@ function UnitList(i: Props) {
 				</p>
 				</td>
 			</tr>
-
 			}
-
 			{noUnitsAvailable('oneBdrm') ? null : <tr style={{backgroundColor: 'gray'}} >
 		
 				<td>

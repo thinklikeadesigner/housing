@@ -16,10 +16,10 @@ You might find adding the json-loader package to be useful as well. We have atta
 
 The goals for this assessment are:
 
-- display a list of all listings with their image and property name, sorted alphabetically by property name
+- display a list of all listings with their image and property name, sorted alphabetically by property name ✅
 - calculate for each property and for each unit type within that property's set of units the following, displaying this data in a table associated with the property image
-  - the average square footage of that unit type
-  - the range of possible occupancy of that unit type
+  - the average square footage of that unit type ✅
+  - the range of possible occupancy of that unit type ✅
 - create three inputs to filter the data
 
   1) a text input on the property name
@@ -28,10 +28,10 @@ The goals for this assessment are:
 
   3) two text inputs to filter on a minimum and maximum occupancy range
 
-- paginate the listings, visually showing
-  - the number of records per page which a user can change
-  - an indication of the current page number
-  - a way to navigate between them
+- paginate the listings, visually showing ✅
+  - the number of records per page which a user can change ✅
+  - an indication of the current page number ✅
+  - a way to navigate between them ✅
 
 We also ask that you consider writing tests, accessibility, and mobile compatibility given time. If you do not have time to write tests, it would be helpful to see just comments in a test file of what iterations of tests you would consider writing (Create React App sets up Jest and React Testing Library for you).
 
