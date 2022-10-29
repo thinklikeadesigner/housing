@@ -7,7 +7,7 @@ type Props = {
 
 const SearchBar = ({ value, changeInput }: Props) => {
 	return (
-		<div className="border-2 border-red-500 searchBar-wrap">
+		<div className=" searchBar-wrap">
 			<input
 				type="text"
 				placeholder="Property Name"

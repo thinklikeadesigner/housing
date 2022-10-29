@@ -9,7 +9,7 @@ export const Pagination = ({propertiesPerPage, totalProperties, paginate, handle
         
 	}
 
-	return <nav className="border-2 border-red-500">
+	return <nav className="">
 		<ul>
 			<h1  className="w-10">pages</h1 >
 			{pageNumbers.map(number => (

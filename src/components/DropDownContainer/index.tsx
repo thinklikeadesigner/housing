@@ -17,7 +17,7 @@ const Dropdown = ({ trigger, menu }:any) => {
 	};
 
 	return (
-		<div className="p-5 border-2 border-red-500 dropdown">
+		<div className="p-5  dropdown">
 			{cloneElement(trigger, {
 				onClick: handleOpen,
 			})}

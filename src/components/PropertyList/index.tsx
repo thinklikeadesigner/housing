@@ -8,7 +8,7 @@ const PropertyList = ( { properties }: any ) => {
 
 	
 
-	return <div className="py-6 border-2 border-red-500">
+	return <div className="py-6 ">
 		{properties.map((i: any) => (
 			<Property key={i.id} id={i.id} name={i.name} picture={i.picture} units={i.units} />
 		))}
