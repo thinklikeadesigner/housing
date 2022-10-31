@@ -15,7 +15,7 @@ function App() {
 	
 
 	return (
-		<div className=" lg:container lg:mx-auto">
+		<div className="px-4 lg:container lg:mx-auto">
 			<PropertyContext.Provider value={properties}>
 				<AmenityContext.Provider value={amenities}>
 					<Home/>
