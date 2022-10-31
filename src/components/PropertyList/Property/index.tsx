@@ -11,11 +11,11 @@ type Props = {
 		maxOccupancy: number;
 		sqft: number;
 		amenities: string[];
-	}[][]
+	}[];
 }
 
 function Property(i: Props) {
-	return <div className="flex justify-center py-6" key={i.id}>
+	return <div  className="flex justify-center py-6" key={i.id}>
 		<div className="overflow-hidden bg-white rounded">
 			<div className="flex flex-col md:flex-row center">
 				<div className="md:w-1/2 md:shrink-0">
@@ -28,7 +28,7 @@ function Property(i: Props) {
 						<div className="p-4 text-sm font-normal leading-4 text-white bg-blue-500"><p className="self-center\">Application Deadline: April 21st, 2023</p></div>
 					</div>
 				</div>
-				<div className="flex flex-col py-4 lg:pl-8 md:pl-4 md:w-1/2 md:py-0">
+				<div className="flex flex-col py-4 md:pl-8 md:w-1/2 md:py-0">
 					<h2 className="mb-3 text-3xl font-semibold tracking-wide text-blue-500 uppercase">{i.name}</h2>
 					<p className="mb-4 ">Street Address, Local City ST 12345</p>
 					<div className="pb-4">

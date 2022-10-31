@@ -12,7 +12,7 @@ type Props = {
 		maxOccupancy: number;
 		sqft: number;
 		amenities: string[];
-	}[][]
+	}[]
 }
 
 // BUG min and max calculations are off

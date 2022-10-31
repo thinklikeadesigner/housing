@@ -41,6 +41,7 @@
     "autoprefixer": "^10.4.13",
     "eslint": "^8.25.0",
     "eslint-plugin-react": "^7.31.10",
+    "jest-cli": "^29.2.2",
     "postcss": "^8.4.18",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.13",

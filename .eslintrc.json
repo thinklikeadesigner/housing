@@ -9,6 +9,9 @@
         "plugin:@typescript-eslint/recommended"
     ],
     "overrides": [
+        {
+            "files": "*.test.ts"
+}
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
