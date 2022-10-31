@@ -4,12 +4,21 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
 import mockData from './mockData.json';
+import { getUnitsByType } from './components/helpers';
 // jest --watch --collect-coverage
 
 const data = mockData;
 
 test('first object', () => {
-	const d = data;
-	expect(d[0].units[0].type).toBe('twoBdrm');
+	expect(data[0].units[0].type).toBe('twoBdrm');
 });
+
+
+
+test('first object', () => {
+	const testUnit = getUnitsByType(data[0], 'twoBdrm');
+
+	expect(testUnit[0].type).toBe('twoBdrm');
+});
+
 
