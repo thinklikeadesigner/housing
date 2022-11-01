@@ -51,7 +51,6 @@ const Home = () => {
 	// results per page
 	const handleResultsPerPage = (num: any) => {
 		setPropertiesPerPage(num);	// get current properties
-		console.log('num');
 	};
 
 	const applyFilters = () => {
@@ -70,13 +69,11 @@ const Home = () => {
 		// updatedPropertyList = updatedPropertyList.filter((item: any) => item.range >= minRange && item.Range <= maxRange);
 
 		if (searchInput) {
-			console.log(searchInput);
 			updatedPropertyList = updatedPropertyList.filter(
 				(item:any) => item.name.toLowerCase().search(searchInput.toLowerCase().trim()) !== -1
 			);
 		}
 
-		console.log(updatedPropertyList);
 		updatedPropertyList = updatedPropertyList.sort((a:any, b:any) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
 		setProperties(updatedPropertyList);
 	};
