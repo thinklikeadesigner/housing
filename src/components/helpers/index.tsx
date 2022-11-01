@@ -19,7 +19,6 @@ export const iterateObj = (obj: any, key: any, value: any) => {
 		} else {
 			if (prop == key) {
 				if (obj[prop] == value) {
-					console.log(obj);
 					return obj;
 				}
 			}
@@ -30,6 +29,8 @@ export const iterateObj = (obj: any, key: any, value: any) => {
 export const getUnitsByType = (property: any, unitType: any) => {
 	return   property.units.map((i: any) => i).filter((j: { type: any; }) => j.type === unitType);
 };
+
+export const noUnitsAvailable = (units: []) => Object.keys(units).length === 0;
 
 export const getUnitsMinMax = (units: any) => {
 	const minOcc = units.map((i: { minOccupancy: any; }) => i.minOccupancy);
