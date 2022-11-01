@@ -17,11 +17,11 @@ type Props = {
 
 // BUG min and max calculations are off
 function UnitList(i: Props) {
+	
 
 	const noUnitsAvailable = (unitType: string) => Object.keys(getUnitsByType(i, unitType)).length === 0;
-	const minOccupancy  = (unitType: string) =>` ${getUnitsMinMax(getUnitsByType(i, unitType)).minOcc}`;
-	const avgSqFt  = (unitType: string) =>` ${Math.floor(getAvgSqft(getUnitsByType(i, unitType)))}`;
-	const maxOccupancy  = (unitType: string) =>` ${getUnitsMinMax(getUnitsByType(i, unitType)).maxOcc}`;
+	const minMaxOccupancy = (unitType: string) => getUnitsMinMax(unitType);
+	const avgSqFt  = (unitType: string) =>` ${getAvgSqft(getUnitsByType(i, unitType))}`;
 	
 	return <div className="overflow-x-hidden">
 		<table className="w-full text-black table-auto" >
@@ -42,8 +42,7 @@ function UnitList(i: Props) {
 					</p>
 					</td>
 					<td className="text-sm font-normal leading-5 text-center md:py-2"><p>
-						{minOccupancy('studio')} -
-						{maxOccupancy('studio')}
+						{`${minMaxOccupancy('studio').minOcc} - ${minMaxOccupancy('studio').maxOcc}`}
 					</p>
 					</td>
 				</tr>
@@ -59,8 +58,7 @@ function UnitList(i: Props) {
 					</td>
 					<td className="text-sm font-normal leading-5 text-center md:py-2">
 						<p>
-							{minOccupancy('oneBdrm')} -
-							{maxOccupancy('oneBdrm')}
+							{`${minMaxOccupancy('oneBdrm').minOcc} - ${minMaxOccupancy('oneBdrm').maxOcc}`}
 						</p>
 						<p>
 						</p>
@@ -76,8 +74,7 @@ function UnitList(i: Props) {
 					</td>
 					<td className="text-sm font-normal leading-5 text-center md:py-2">
 						<p>
-							{minOccupancy('twoBdrm')} -
-							{maxOccupancy('twoBdrm')}
+							{`${minMaxOccupancy('twoBdrm').minOcc} - ${minMaxOccupancy('twoBdrm').maxOcc}`}
 						</p>
 					</td>
 				</tr>}
@@ -90,8 +87,7 @@ function UnitList(i: Props) {
 					</p>
 					</td>
 					<td className="text-sm font-normal leading-5 text-center md:py-2"><p>
-						{minOccupancy('threeBdrm')} -
-						{maxOccupancy('threeBdrm')}
+						{`${minMaxOccupancy('threeBdrm').minOcc} - ${minMaxOccupancy('threeBdrm').maxOcc}`}
 					</p>
 					</td>
 				</tr>}
@@ -103,8 +99,8 @@ function UnitList(i: Props) {
 						{avgSqFt('fourBdrm')}
 					</p>
 					</td>
-					<td className="text-sm font-normal leading-5 text-center md:py-2"><p >
-						{minOccupancy('fourBdrm')} - {maxOccupancy('fourBdrm')}
+					<td className="text-sm font-normal leading-5 text-center md:py-2"><p>
+						{`${minMaxOccupancy('fourBdrm').minOcc} - ${minMaxOccupancy('fourBdrm').maxOcc}`}
 					</p>
 					</td>
 				</tr>}

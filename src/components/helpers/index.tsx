@@ -33,7 +33,7 @@ export const getUnitsByType = (property: any, unitType: any) => {
 
 export const getUnitsMinMax = (units: any) => {
 	const minOcc = units.map((i: { minOccupancy: any; }) => i.minOccupancy);
-	const absMin = Math.max(...minOcc);
+	const absMin = Math.min(...minOcc);
 
 	const maxOcc = units.map((i: { maxOccupancy: any; }) => i.maxOccupancy);
 	const absMax = Math.max(...maxOcc);
@@ -43,7 +43,7 @@ export const getUnitsMinMax = (units: any) => {
 
 export const getAvgSqft = (units: any) => {
 	const sqftList = units.map((i: { sqft: any; }) => i.sqft);
-	return sqftList.reduce((a:any, b:any) => a + b) / sqftList.length;
+	return Math.floor(sqftList.reduce((a:any, b:any) => a + b) / sqftList.length);
 };
 
 
