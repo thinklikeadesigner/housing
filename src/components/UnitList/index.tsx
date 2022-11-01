@@ -21,14 +21,17 @@ export type Props = {
 // IMPLEMENT range filter here
 
 function UnitList(i: Props) {
+
 	const studioArr = getUnitsByType(i, 'studio');
 	const oneBdrmArr = getUnitsByType(i, 'oneBdrm');
 	const twoBdrmArr = getUnitsByType(i, 'twoBdrm');
 	const threeBdrmArr = getUnitsByType(i, 'threeBdrm');
 	const fourBdrmArr = getUnitsByType(i, 'fourBdrm');
 
-	const unitType: any = ['studio', 'oneBdrm', 'twoBdrm', 'threeBdrm', 'fourBdrm'].map((type: any) => {return {[type]: getUnitsByType(i, type)};			
-	});
+	// IDEA create arrays dynamically for unit types
+	// const unitType: any = ['studio', 'oneBdrm', 'twoBdrm', 'threeBdrm', 'fourBdrm'].map((type: any) => {return {[type]: getUnitsByType(i, type)};			
+	// });
+
 
 	function tableRow(unitArr: [], type: string): React.ReactNode {
 		return noUnitsAvailable(unitArr) ? null : <tr className="h-10 even:bg-gray-100 odd:bg-white">
