@@ -1,33 +1,38 @@
-import React from 'react';
-import { getAvgSqft, getUnitsByType, getUnitsMinMax, noUnitsAvailable } from '../helpers';
+import React, {useContext, useEffect, useState} from 'react';
+import { AmenityContext } from '../../context/AmenityContext';
+import { getAvgSqft, getUnitAmenities, getUnitsByType, getUnitsMinMax, noUnitsAvailable, unitHasAmenities } from '../helpers';
 import './styles.css';
+import ListItem from '../List/ListItem/index';
 
 
-
-export type Props = {
-    id: string;
-    name: string;
-    picture: string;
-    units: {
-        type: string;
-        minOccupancy: number;
-        maxOccupancy: number;
-        sqft: number;
-        amenities: string[];
-    }[]
-}
 
 // IMPLEMENT amenities filter here
 // IMPLEMENT range filter here
 
-function UnitList(i: Props) {
+function UnitList(units: any, amenities: any) {
+	// const studioArr = ;
+	// const oneBdrmArr = getUnitsByType(i, 'oneBdrm');
+	// const twoBdrmArr = getUnitsByType(i, 'twoBdrm');
+	// const threeBdrmArr = getUnitsByType(i, 'threeBdrm');
+	// const fourBdrmArr = getUnitsByType(i, 'fourBdrm');
+	const [studios, setStudios] = useState(getUnitsByType(units, 'studio'));
+	const [oneBdrms, setOneBdrms] = useState(getUnitsByType(units, 'oneBdrm'));
+	const [twoBdrms, setTwoBdrms] = useState(getUnitsByType(units, 'twoBdrm'));
+	const [threeBdrms, setThreeBdrms] = useState(getUnitsByType(units, 'threeBdrm'));
+	const [FourBdrms, setFourBdrms] = useState(getUnitsByType(units, 'fourBdrm'));
 
-	const studioArr = getUnitsByType(i, 'studio');
-	const oneBdrmArr = getUnitsByType(i, 'oneBdrm');
-	const twoBdrmArr = getUnitsByType(i, 'twoBdrm');
-	const threeBdrmArr = getUnitsByType(i, 'threeBdrm');
-	const fourBdrmArr = getUnitsByType(i, 'fourBdrm');
 
+	useEffect(() => {
+		if (amenities.length)
+		{
+			setStudios(() => studios.filter((studio: any) => {
+				unitHasAmenities(getUnitAmenities(studio), amenities);
+			}));
+		}
+	
+
+	}, [studios]);
+	
 	// IDEA create arrays dynamically for unit types
 	// const unitType: any = ['studio', 'oneBdrm', 'twoBdrm', 'threeBdrm', 'fourBdrm'].map((type: any) => {return {[type]: getUnitsByType(i, type)};			
 	// });
@@ -59,11 +64,11 @@ function UnitList(i: Props) {
 				</tr>
 			</thead>
 			<tbody  >
-				{tableRow(studioArr, 'Studio')}
-				{tableRow(oneBdrmArr, 'One Bedroom')}
-				{tableRow(twoBdrmArr, 'Two Bedroom')}
-				{tableRow(threeBdrmArr, 'Three Bedroom')}
-				{tableRow(fourBdrmArr, 'Four Bedroom')}
+				{tableRow(studios, 'Studio')}
+				{tableRow(oneBdrms, 'One Bedroom')}
+				{tableRow(twoBdrms, 'Two Bedroom')}
+				{tableRow(threeBdrms, 'Three Bedroom')}
+				{tableRow(FourBdrms, 'Four Bedroom')}
 			</tbody>
 		</table>
 	</div>;

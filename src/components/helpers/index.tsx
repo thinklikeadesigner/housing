@@ -6,6 +6,9 @@ export const getAmenities = (housingdata:any) => {
 	return amenitiesCheckBoxes;
 };
 
+export const unitHasAmenities = (amenitiesArray: any, chosenAmenities: any) => chosenAmenities.every((i: any) => amenitiesArray.includes(i));
+export const getUnitAmenities = (unit: any) => unit.amenities.map((i: any) => i);
+
 // UNPLUGGED
 // function getRoomTypes(property: { units: any[]; }) {
 // 	const roomTypes = new Set(property.units.map(i => i.type));

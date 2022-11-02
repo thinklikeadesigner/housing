@@ -21,7 +21,7 @@ const Dropdown = ({ trigger, menu }:any) => {
 				onClick: handleOpen,
 			})}
 			{open ? (
-				<ul className="absolute w-40 p-0 list-none rounded bg-slate-200">
+				<ul className="absolute z-20 w-40 p-0 list-none rounded bg-slate-200">
 					{menu.map((menuItem: any, index: any) => (
 						<li key={index} className=" menu-item">
 							{cloneElement(menuItem, {

@@ -4,7 +4,7 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
 import mockData from './mockData.json';
-import { getUnitsByType, getUnitsMinMax, getAvgSqft } from './components/helpers';
+import { getUnitsByType, getUnitsMinMax, getAvgSqft, unitHasAmenities, getUnitAmenities } from './components/helpers';
 
 
 // jest --watch --collect-coverage
@@ -116,6 +116,171 @@ describe('to get avg sq ft', () => {
 		const threeBdrm = getUnitsByType(data[0], 'threeBdrm');
 		const threeBdrmSqFt = getAvgSqft(threeBdrm);
 		expect(threeBdrmSqFt).toBe(2167);
+	});
+	test('to get avg sq ft', () => {
+		const fourBdrm = getUnitsByType(data[0], 'fourBdrm');
+		const fourBdrmSqFt = getAvgSqft(fourBdrm);
+		expect(fourBdrmSqFt).toBe(3022);
+	});
+});
+
+
+
+describe('filter amenities by unit', () => {
+	test('should return amenities from a single unit', () => {
+
+		const unit = {
+			type: 'studio',
+			minOccupancy: 1,
+			maxOccupancy: 3,
+			sqft: 1633,
+			amenities: [
+				'fireplace',
+				'air conditioning',
+				'accessible bathroom',
+				'elevator',
+				'wheel chair access',
+				'washer & dryer'
+			]
+		};
+		
+
+		expect(getUnitAmenities(unit)).toEqual([
+			'fireplace',
+			'air conditioning',
+			'accessible bathroom',
+			'elevator',
+			'wheel chair access',
+			'washer & dryer'
+		]);
+
+	});
+	test('should compare and check that a unit has required amenities', () => {
+		const amenitychecked = [
+			'fireplace',
+			'air conditioning',
+			'accessible bathroom',
+			'elevator',
+			'wheel chair access',
+			'washer & dryer'];
+		
+		const unitAmenities = [
+			'fireplace',
+			'air conditioning',
+			'accessible bathroom',
+			'elevator',
+			'wheel chair access',
+			'washer & dryer'
+		];
+
+		expect(unitHasAmenities(unitAmenities, amenitychecked)).toBeTruthy();
+	});
+	test('should check that unitHasAmenities() and getUnitAmenities() work together', () => {
+		const amenitychecked = [
+			'fireplace',
+			'air conditioning',
+			'accessible bathroom',
+			'elevator',
+			'wheel chair access',
+			'washer & dryer'];
+		const unit = {
+			type: 'studio',
+			minOccupancy: 1,
+			maxOccupancy: 3,
+			sqft: 1633,
+			amenities: [
+				'fireplace',
+				'air conditioning',
+				'accessible bathroom',
+				'elevator',
+				'wheel chair access',
+				'washer & dryer'
+			]
+		};
+
+		const answer = unitHasAmenities(getUnitAmenities(unit), amenitychecked);
+
+		expect(answer).toBeTruthy();
+	});
+	test('should return true because amenities checked are an exact match', () => {
+		const amenitychecked = [
+			'fireplace',
+			'air conditioning',
+			'accessible bathroom',
+			'elevator',
+			'wheel chair access',
+			'washer & dryer'];
+		
+		const unit = {
+			type: 'studio',
+			minOccupancy: 1,
+			maxOccupancy: 3,
+			sqft: 1633,
+			amenities: [
+				'fireplace',
+				'air conditioning',
+				'accessible bathroom',
+				'elevator',
+				'wheel chair access',
+				'washer & dryer'
+			]
+		};
+		const answer = unitHasAmenities(getUnitAmenities(unit), amenitychecked);
+		expect(answer).toBeTruthy();
+	});
+	test('should return false, studio doesnt have one of the checked amenities', () => {
+
+		const amenitychecked = [
+			'extra amenity',
+			'fireplace',
+			'air conditioning',
+			'accessible bathroom',
+			'elevator',
+			'wheel chair access',
+			'washer & dryer'];
+		
+		const unit = {
+			type: 'studio',
+			minOccupancy: 1,
+			maxOccupancy: 3,
+			sqft: 1633,
+			amenities: [
+				'fireplace',
+				'air conditioning',
+				'accessible bathroom',
+				'elevator',
+				'wheel chair access',
+				'washer & dryer',
+			]
+		};
+		const answer = unitHasAmenities(getUnitAmenities(unit), amenitychecked);
+		expect(answer).toBeFalsy();
+	});
+	test('should filter out amenities that do not have required amenities', () => {
+		// list of studio units
+		const studios = getUnitsByType(data[0], 'studio');
+
+		const amenitychecked = [
+			'washer & dryer'];
+		
+		const unit = {
+			type: 'studio',
+			minOccupancy: 1,
+			maxOccupancy: 3,
+			sqft: 1633,
+			amenities: [
+				'fireplace',
+				'air conditioning',
+				'accessible bathroom',
+				'elevator',
+				'wheel chair access',
+				'washer & dryer',
+			]
+		};
+
+		const filtered = studios.filter((studio: any) => unitHasAmenities(getUnitAmenities(studio), amenitychecked));
+
+		expect(filtered.length).toBe(4);
 	});
 	test('to get avg sq ft', () => {
 		const fourBdrm = getUnitsByType(data[0], 'fourBdrm');

@@ -25,15 +25,22 @@ const Home = () => {
 	const [propertiesPerPage, setPropertiesPerPage] = useState(10); // 10 20 30 40 50 100
 	const [searchInput, setSearchInput] = useState('');
 	const [selectedRange, setSelectedRange] = useState([1000, 5000]);
+	const [amenitiesArray, setAmenitiesArray] = useState([]);
 
 
 	const updateCheckStatus = (index: number) => {
 		const amenitiesStateList = amenities;
 		const changeCheckedAmenities = amenitiesStateList.map((amenity: any, currentIndex: any) => currentIndex === index ? { ...amenity, checked: !amenity.checked } : amenity
 		);
+
+		const newAmenitiesArray = changeCheckedAmenities.filter((amenity: any) => amenity.checked).map((i:any) => i.name);
+
+
 		setAmenities(
 			changeCheckedAmenities
 		);
+		setAmenitiesArray(newAmenitiesArray);
+		
 	};
 	
 	// to calculate which properties go on each page
@@ -67,13 +74,13 @@ const Home = () => {
 
 		let updatedPropertyList = propertyList;
 
-		const amenityChecked = amenities.filter((item: any) => item.checked).map((item: any) => item.name.toLowerCase());
-		// IDEA filter at the unit level and if there's no unit don't show the unit. if there's no units don't show the property
-		if (amenityChecked.length !== 0) {
-		// BUG needs to find amenities, but not in exact same order
-
-			updatedPropertyList = updatedPropertyList.filter((item: any) => JSON.stringify(item).includes(JSON.stringify(amenityChecked)));
-		}
+		// const amenityChecked = amenities.filter((item: any) => item.checked).map((item: any) => item.name.toLowerCase());
+		// // IDEA filter at the unit level and if there's no unit don't show the unit. if there's no units don't show the property
+		// if (amenityChecked.length !== 0) {
+		// // BUG needs to find amenities, but not in exact same order
+		// 	console.log(amenityChecked);
+		// 	updatedPropertyList = updatedPropertyList.filter((item: any) => JSON.stringify(item).includes(JSON.stringify(amenityChecked)));
+		// }
 		// const minRange = selectedRange[0];
 		// const maxRange = selectedRange[1];
 		// updatedPropertyList = updatedPropertyList.filter((item: any) => item.range >= minRange && item.Range <= maxRange);
@@ -104,7 +111,7 @@ const Home = () => {
 			</DropDownContainer>
 		</FilterPanel>
 		{/* <Range value={'undefined'} changeRange={() => console.log('s')}><RangeInput/></Range> */}
-		<PropertyList properties={currentProperties} >
+		<PropertyList properties={currentProperties} amenities={amenitiesArray} >
 			<Pagination propertiesPerPage={propertiesPerPage} currentPage={currentPage} totalProperties={properties.length} paginate={paginate}/>
 		</PropertyList>
 	</div>;
