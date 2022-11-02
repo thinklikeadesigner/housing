@@ -1,11 +1,10 @@
 /* eslint-disable react/jsx-key */
 import React, { cloneElement, useState } from 'react';
-import CheckBox from '../CheckBox';
 import './styles.css';
 
 
 const DropDownContainer = ({ title, children }: any) =>
-	<Dropdown trigger={<button> {title} </button>} menu={[children]} />;
+	<Dropdown trigger={<button className="px-4 py-2 mr-2 text-white bg-blue-500 rounded w-max hover:bg-blue-400"> {title} </button>} menu={[children]} />;
 
 
 	
@@ -17,14 +16,14 @@ const Dropdown = ({ trigger, menu }:any) => {
 	};
 
 	return (
-		<div className="p-5  dropdown">
+		<div className="relative text-lg ">
 			{cloneElement(trigger, {
 				onClick: handleOpen,
 			})}
 			{open ? (
-				<ul className="menu">
+				<ul className="absolute w-40 p-0 list-none rounded bg-slate-200">
 					{menu.map((menuItem: any, index: any) => (
-						<li key={index} className="menu-item">
+						<li key={index} className=" menu-item">
 							{cloneElement(menuItem, {
 								onClick: () => {
 									menuItem.props.onClick();

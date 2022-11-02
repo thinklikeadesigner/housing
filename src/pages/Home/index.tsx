@@ -4,14 +4,18 @@ import DropDownContainer from '../../components/DropDownContainer';
 import { Pagination } from '../../components/Paginate';
 import PropertyList from '../../components/PropertyList';
 import SearchBar from '../../components/SearchBar';
-import SliderProton from '../../components/SliderProton';
+import Range from '../../components/Range';
 import { AmenityContext } from '../../context/AmenityContext/index';
 import { PropertyContext } from '../../context/PropertyContext/index';
 import ResultsCount from '../../components/ResultsCount/index';
+import FilterPanel from '../../components/FilterPanel';
+import RangeInput from '../../components/RangeInput/index';
 
 // type Props = {};
 
 const Home = () => {
+	const [open, setOpen] = useState(false);
+
 	const amenitiesList = useContext<any>(AmenityContext);
 	const [amenities, setAmenities] = useState(amenitiesList);
 	const propertyList = useContext<any>(PropertyContext);
@@ -53,6 +57,12 @@ const Home = () => {
 		setPropertiesPerPage(num);	// get current properties
 	};
 
+
+	const handleOpen = () => {
+		setOpen(() => !open);
+	};
+
+
 	const applyFilters = () => {
 
 		let updatedPropertyList = propertyList;
@@ -82,21 +92,21 @@ const Home = () => {
 		applyFilters();
 	}, [amenities, searchInput]);
 	
+
 	return <div className="flex flex-col">
-		<h1>page number {currentPage}</h1>
-		{/* <SliderProton           value={selectedRange}
-			changeRange={changeRange} /> */}
-		<SearchBar value={searchInput} changeInput={handleChangeInput} />
-		<Pagination  propertiesPerPage={propertiesPerPage} totalProperties={properties.length} paginate={paginate}/>
-		<div className="flex">
-			<DropDownContainer title={'Amenities'} >
+		<FilterPanel>
+			<SearchBar value={searchInput} changeInput={handleChangeInput} />
+			<DropDownContainer open={open} handleOpen={handleOpen} title={'Amenities'} >
 				<AmenityMenu amenities={amenities} updateCheckStatus={updateCheckStatus} />
 			</DropDownContainer>
-			<DropDownContainer title={'Results per Page'} >
+			<DropDownContainer open={open} handleOpen={handleOpen}  title={'Results per Page'} >
 				<ResultsCount handleResultsPerPage={handleResultsPerPage}/>
 			</DropDownContainer>
-		</div>
-		<PropertyList properties={currentProperties} />
+		</FilterPanel>
+		{/* <Range value={'undefined'} changeRange={() => console.log('s')}><RangeInput/></Range> */}
+		<PropertyList properties={currentProperties} >
+			<Pagination propertiesPerPage={propertiesPerPage} currentPage={currentPage} totalProperties={properties.length} paginate={paginate}/>
+		</PropertyList>
 	</div>;
 };
 

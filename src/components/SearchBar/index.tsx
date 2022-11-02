@@ -1,4 +1,3 @@
-import './styles.css';
 import React from 'react';
 type Props = {
   value: any;
@@ -7,8 +6,9 @@ type Props = {
 
 const SearchBar = ({ value, changeInput }: Props) => {
 	return (
-		<div className=" searchBar-wrap">
+		<div className="flex items-center w-full py-8">
 			<input
+				className="w-56 text-2xl placeholder-gray-500 border rounded border-slate-300"
 				type="text"
 				placeholder="Property Name"
 				value={value}

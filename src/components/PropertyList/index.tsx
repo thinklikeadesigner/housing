@@ -1,9 +1,10 @@
 import React from 'react';
 import Property from './Property';
+import NoResults from '../NoResults/index';
 
-const PropertyList = ( { properties }: any ) => {
+const PropertyList = ( { properties, children }: any ) => {
 
-	if (properties.length == 0) return <h1>no results</h1>;
+	if (properties.length == 0) return <NoResults />;
 
 
 	
@@ -12,6 +13,7 @@ const PropertyList = ( { properties }: any ) => {
 		{properties.map((i: any) => (
 			<Property key={i.id} id={i.id} name={i.name} picture={i.picture} units={i.units} />
 		))}
+		{children}
 	</div>;
 };
 
