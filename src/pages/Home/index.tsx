@@ -43,16 +43,16 @@ const Home = () => {
 			changeCheckedAmenities
 		);
 		setAmenitiesArray(newAmenitiesArray);
-		
+        
 	};
-	
+    
 	// to calculate which properties go on each page
 	const indexOfLastProperty = currentPage * propertiesPerPage;
 	const indexOfFirstProperty = indexOfLastProperty - propertiesPerPage;
 	const currentProperties = properties.slice(indexOfFirstProperty, indexOfLastProperty);
 
 	const handleChangeRange = (_e: { target: { value: any } }, value: any) => setSelectedRange(value);
-	
+    
 	// for text search
 	const handleChangeInput = (_e: { target: { value: any } }) => setSearchInput(_e.target.value);
 
@@ -64,7 +64,7 @@ const Home = () => {
 
 	// results per page
 	const handleResultsPerPage = (num: any) => {
-		setPropertiesPerPage(num);	// get current properties
+		setPropertiesPerPage(num);   // get current properties
 	};
 
 
@@ -82,24 +82,27 @@ const Home = () => {
 		if (amenityChecked.length !== 0) {
 
 			const reduceArr: any[] = [];
-			const deleteEmpties: any[] = [];
-
 			updatedPropertyList.reduce((prev: any, current: any) => {
-				if (current.units.filter((unit: any) => unitHasAmenities(getUnitAmenities(unit), amenityChecked))) {
+
+				const filteredUnits = current.units.filter((unit: any) => unitHasAmenities(getUnitAmenities(unit), amenityChecked));
+				if (filteredUnits.length) {
+
 					const filteredProperty = current.units.filter((unit: any) => unitHasAmenities(getUnitAmenities(unit), amenityChecked));
-					reduceArr.push(filteredProperty);
+					current.units = filteredProperty;
+					reduceArr.push(current);
+					const h = reduceArr.length;
+					console.log({reduceArr});
 				}
 			}, reduceArr);
 
-			reduceArr.reduce((prev: any, current: any) => {
-				if (current.length !== 0) {
-					
-					deleteEmpties.push(current);
-				}
-			},deleteEmpties);
-			console.log({deleteEmpties});
-
-			// updatedPropertyList = deleteEmpties;
+			// reduceArr.reduce((prev: any, current: any) => {
+			//  if (current.length !== 0) {
+                    
+			//      deleteEmpties.push(current);
+			//  }
+			// },deleteEmpties);
+            
+			updatedPropertyList = reduceArr;
 		}
 		// const minRange = selectedRange[0];
 		// const maxRange = selectedRange[1];
@@ -111,14 +114,16 @@ const Home = () => {
 			);
 		}
 
-		updatedPropertyList = updatedPropertyList.sort((a:any, b:any) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+		updatedPropertyList = updatedPropertyList.sort((a: any, b: any) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+		console.log({updatedPropertyList});
+		
 		setProperties(updatedPropertyList);
 	};
 
 	useEffect(() => {
 		applyFilters();
 	}, [amenities, searchInput]);
-	
+    
 
 	return <div className="flex flex-col">
 		<FilterPanel>
@@ -138,3 +143,4 @@ const Home = () => {
 };
 
 export default Home;
+
