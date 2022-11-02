@@ -10,6 +10,9 @@ import { PropertyContext } from '../../context/PropertyContext/index';
 import ResultsCount from '../../components/ResultsCount/index';
 import FilterPanel from '../../components/FilterPanel';
 import RangeInput from '../../components/RangeInput/index';
+import { getUnitAmenities, unitHasAmenities } from '../../components/helpers';
+
+
 
 // type Props = {};
 
@@ -74,13 +77,30 @@ const Home = () => {
 
 		let updatedPropertyList = propertyList;
 
-		// const amenityChecked = amenities.filter((item: any) => item.checked).map((item: any) => item.name.toLowerCase());
-		// // IDEA filter at the unit level and if there's no unit don't show the unit. if there's no units don't show the property
-		// if (amenityChecked.length !== 0) {
-		// // BUG needs to find amenities, but not in exact same order
-		// 	console.log(amenityChecked);
-		// 	updatedPropertyList = updatedPropertyList.filter((item: any) => JSON.stringify(item).includes(JSON.stringify(amenityChecked)));
-		// }
+		const amenityChecked = amenities.filter((item: any) => item.checked).map((item: any) => item.name.toLowerCase());
+
+		if (amenityChecked.length !== 0) {
+
+			const reduceArr: any[] = [];
+			const deleteEmpties: any[] = [];
+
+			updatedPropertyList.reduce((prev: any, current: any) => {
+				if (current.units.filter((unit: any) => unitHasAmenities(getUnitAmenities(unit), amenityChecked))) {
+					const filteredProperty = current.units.filter((unit: any) => unitHasAmenities(getUnitAmenities(unit), amenityChecked));
+					reduceArr.push(filteredProperty);
+				}
+			}, reduceArr);
+
+			reduceArr.reduce((prev: any, current: any) => {
+				if (current.length !== 0) {
+					
+					deleteEmpties.push(current);
+				}
+			},deleteEmpties);
+			console.log({deleteEmpties});
+
+			// updatedPropertyList = deleteEmpties;
+		}
 		// const minRange = selectedRange[0];
 		// const maxRange = selectedRange[1];
 		// updatedPropertyList = updatedPropertyList.filter((item: any) => item.range >= minRange && item.Range <= maxRange);
