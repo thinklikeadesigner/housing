@@ -5,12 +5,13 @@ import { Pagination } from '../../components/Paginate';
 import PropertyList from '../../components/PropertyList';
 import SearchBar from '../../components/SearchBar';
 import Range from '../../components/Range';
-import { AmenityContext } from '../../context/AmenityContext/index';
+// import { AmenityContext } from '../../context/AmenityContext/index';
 import { PropertyContext } from '../../context/PropertyContext/index';
 import ResultsCount from '../../components/ResultsCount/index';
 import FilterPanel from '../../components/FilterPanel';
 import RangeInput from '../../components/RangeInput/index';
-import { getUnitAmenities, unitHasAmenities } from '../../components/helpers';
+import { alphaSort, getAmenities, getUnitAmenities, unitHasAmenities } from '../../components/helpers';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 
 
@@ -18,14 +19,12 @@ import { getUnitAmenities, unitHasAmenities } from '../../components/helpers';
 
 const Home = () => {
 	const [open, setOpen] = useState(false);
-
-	const amenitiesList = useContext<any>(AmenityContext);
-	const [amenities, setAmenities] = useState(amenitiesList);
 	const propertyList = useContext<any>(PropertyContext);
-	const [properties, setProperties] = useState(propertyList);
-
-	const [currentPage, setCurrentPage] = useState(1);
-	const [propertiesPerPage, setPropertiesPerPage] = useState(10); // 10 20 30 40 50 100
+	const [amenities, setAmenities] = useLocalStorage('amenities', getAmenities(propertyList));
+	const [properties, setProperties] = useLocalStorage('properties', propertyList);
+	
+	const [currentPage, setCurrentPage] = useLocalStorage('currentPage', 1);
+	const [propertiesPerPage, setPropertiesPerPage] = useLocalStorage('propertiesPerPage', 10);
 	const [searchInput, setSearchInput] = useState('');
 	const [selectedRange, setSelectedRange] = useState([1000, 5000]);
 	const [amenitiesArray, setAmenitiesArray] = useState([]);
@@ -42,7 +41,7 @@ const Home = () => {
 		setAmenities(
 			changeCheckedAmenities
 		);
-		setAmenitiesArray(newAmenitiesArray);
+		// setAmenitiesArray(newAmenitiesArray);
         
 	};
     
@@ -114,7 +113,7 @@ const Home = () => {
 			);
 		}
 
-		updatedPropertyList = updatedPropertyList.sort((a: any, b: any) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+		updatedPropertyList = alphaSort(updatedPropertyList);
 		console.log({updatedPropertyList});
 		
 		setProperties(updatedPropertyList);
@@ -128,15 +127,18 @@ const Home = () => {
 	return <div className="flex flex-col">
 		<FilterPanel>
 			<SearchBar value={searchInput} changeInput={handleChangeInput} />
+			<div className="mr-10"></div>
+			<RangeInput min={0} max={40} onChange={() => console.log('hi')} />
+			<div className="mr-10"></div>
 			<DropDownContainer open={open} handleOpen={handleOpen} title={'Amenities'} >
 				<AmenityMenu amenities={amenities} updateCheckStatus={updateCheckStatus} />
 			</DropDownContainer>
+			<div className="w-30"></div>
 			<DropDownContainer open={open} handleOpen={handleOpen}  title={'Results per Page'} >
 				<ResultsCount handleResultsPerPage={handleResultsPerPage}/>
 			</DropDownContainer>
 		</FilterPanel>
-		{/* <Range value={'undefined'} changeRange={() => console.log('s')}><RangeInput/></Range> */}
-		<PropertyList properties={currentProperties} amenities={amenitiesArray} >
+		<PropertyList properties={currentProperties} amenities={amenities} >
 			<Pagination propertiesPerPage={propertiesPerPage} currentPage={currentPage} totalProperties={properties.length} paginate={paginate}/>
 		</PropertyList>
 	</div>;

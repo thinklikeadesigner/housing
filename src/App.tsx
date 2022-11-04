@@ -1,25 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import data from './mockData.json';
 import { PropertyContext } from './context/PropertyContext/index';
 import Home from './pages/Home';
-import { AmenityContext } from './context/AmenityContext';
-import { getAmenities } from './components/helpers/index';
+// import { AmenityContext } from './context/AmenityContext';
+import { getAmenities, alphaSort } from './components/helpers/index';
 
 
 function App() {
 
-
-	const [properties, setProperties] = useState<any>(data);
-	const amenities = getAmenities(data);
 	
+
+	const [properties, setProperties] = useState<any>(() => alphaSort(data));
 	
 
 	return (
 		<div className="px-4 lg:container lg:mx-auto">
 			<PropertyContext.Provider value={properties}>
-				<AmenityContext.Provider value={amenities}>
-					<Home/>
-				</AmenityContext.Provider>
+				<Home/>
 			</PropertyContext.Provider>
 		</div>
 	);

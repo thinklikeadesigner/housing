@@ -16,12 +16,12 @@ const Dropdown = ({ trigger, menu }:any) => {
 	};
 
 	return (
-		<div className="relative text-lg ">
+		<div className="relative w-full text-lg">
 			{cloneElement(trigger, {
 				onClick: handleOpen,
 			})}
 			{open ? (
-				<ul className="absolute z-20 w-40 p-0 list-none rounded bg-slate-200">
+				<ul className="absolute z-20 w-56 p-0 list-none rounded bg-slate-200">
 					{menu.map((menuItem: any, index: any) => (
 						<li key={index} className=" menu-item">
 							{cloneElement(menuItem, {

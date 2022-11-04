@@ -1,5 +1,9 @@
 
-export const getAmenities = (housingdata:any) => {
+export const alphaSort = (data: any) => {
+	return data.sort((a: any, b: any) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+};
+
+export const getAmenities = (housingdata: any) => {
 	const amenitiesCheckBoxes: any = [];
 	const amenitiesSet = new Set(housingdata.map((i: { units: any[]; }) => i.units.map(i => i.amenities)).flat().flat());
 	amenitiesSet.forEach(item => amenitiesCheckBoxes.push({ name: `${item}`, checked: false }));
