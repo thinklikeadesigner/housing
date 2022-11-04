@@ -3,7 +3,7 @@ import data from './mockData.json';
 import { PropertyContext } from './context/PropertyContext/index';
 import Home from './pages/Home';
 // import { AmenityContext } from './context/AmenityContext';
-import { getAmenities, alphaSort } from './components/helpers/index';
+import { alphaSort } from './components/helpers/index';
 
 
 function App() {
