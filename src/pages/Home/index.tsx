@@ -12,6 +12,7 @@ import FilterPanel from '../../components/FilterPanel';
 import RangeInput from '../../components/RangeInput/index';
 import { alphaSort, getAmenities, getUnitAmenities, unitHasAmenities } from '../../components/helpers';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { check } from 'prettier';
 
 
 
@@ -21,28 +22,22 @@ const Home = () => {
 	const [open, setOpen] = useState(false);
 	const propertyList = useContext<any>(PropertyContext);
 	const [amenities, setAmenities] = useLocalStorage('amenities', getAmenities(propertyList));
-	const [properties, setProperties] = useLocalStorage('properties', propertyList);
-	
+	const [properties, setProperties] = useLocalStorage('properties', propertyList); 
+	const [checked, setChecked] = useState(false); 
 	const [currentPage, setCurrentPage] = useLocalStorage('currentPage', 1);
 	const [propertiesPerPage, setPropertiesPerPage] = useLocalStorage('propertiesPerPage', 10);
 	const [searchInput, setSearchInput] = useState('');
 	const [selectedRange, setSelectedRange] = useState([1000, 5000]);
-	const [amenitiesArray, setAmenitiesArray] = useState([]);
 
 
 	const updateCheckStatus = (index: number) => {
+		setChecked(()=> !check);
 		const amenitiesStateList = amenities;
 		const changeCheckedAmenities = amenitiesStateList.map((amenity: any, currentIndex: any) => currentIndex === index ? { ...amenity, checked: !amenity.checked } : amenity
 		);
-
-		const newAmenitiesArray = changeCheckedAmenities.filter((amenity: any) => amenity.checked).map((i:any) => i.name);
-
-
 		setAmenities(
 			changeCheckedAmenities
 		);
-		// setAmenitiesArray(newAmenitiesArray);
-        
 	};
     
 	// to calculate which properties go on each page
