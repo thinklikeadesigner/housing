@@ -22,7 +22,7 @@ function UnitList(units: any) {
 			</p>
 			</td>
 			<td className="text-sm font-normal leading-5 text-center md:py-2"><p>
-				{`${getUnitsMinMax(unitArr).minOcc} - ${getUnitsMinMax(unitArr).maxOcc}`}
+				{`${getUnitsMinMax(unitArr)[0]} - ${getUnitsMinMax(unitArr)[1]}`}
 			</p>
 			</td>
 		</tr>;
