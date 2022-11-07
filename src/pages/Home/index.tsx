@@ -4,12 +4,15 @@ import DropDownContainer from '../../components/DropDownContainer';
 import { Pagination } from '../../components/Paginate';
 import PropertyList from '../../components/PropertyList';
 import SearchBar from '../../components/SearchBar';
+import Range from '../../components/Range';
+// import { AmenityContext } from '../../context/AmenityContext/index';
 import { PropertyContext } from '../../context/PropertyContext/index';
 import ResultsCount from '../../components/ResultsCount/index';
 import FilterPanel from '../../components/FilterPanel';
 import RangeInput from '../../components/RangeInput/index';
 import { alphaSort, getAmenities, getUnitAmenities, isUnitInRange, unitHasAmenities, unitRange } from '../../components/helpers';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { check } from 'prettier';
 
 
 
@@ -25,7 +28,6 @@ const Home = () => {
 	const [propertiesPerPage, setPropertiesPerPage] = useLocalStorage('propertiesPerPage', 10);
 	const [searchInput, setSearchInput] = useState('');
 	const [selectedRange, setSelectedRange] = useState([1000, 5000]);
-
 
 
 	const updateCheckStatus = (index: number) => {
@@ -83,13 +85,19 @@ const Home = () => {
 				}
 			}, reduceArr);
 
+			// reduceArr.reduce((prev: any, current: any) => {
+			//  if (current.length !== 0) {
+                    
+			//      deleteEmpties.push(current);
+			//  }
+			// },deleteEmpties);
+
 			updatedPropertyList = reduceArr;
 		}
-
+		// const minRange = selectedRange[0];
+		// const maxRange = selectedRange[1];
 		const anotherArr: any[] = [];
 		// let  filtered: any[] = [];
-		const minRange = selectedRange[0];
-		const maxRange = selectedRange[1];
 
 		// updatedPropertyList.reduce((prev: any, current: any) => {
 
