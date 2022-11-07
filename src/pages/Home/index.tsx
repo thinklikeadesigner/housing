@@ -4,8 +4,6 @@ import DropDownContainer from '../../components/DropDownContainer';
 import { Pagination } from '../../components/Paginate';
 import PropertyList from '../../components/PropertyList';
 import SearchBar from '../../components/SearchBar';
-import Range from '../../components/Range';
-// import { AmenityContext } from '../../context/AmenityContext/index';
 import { PropertyContext } from '../../context/PropertyContext/index';
 import ResultsCount from '../../components/ResultsCount/index';
 import FilterPanel from '../../components/FilterPanel';
@@ -19,11 +17,9 @@ import { check } from 'prettier';
 // type Props = {};
 
 const Home = () => {
-	const [open, setOpen] = useState(false);
 	const propertyList = useContext<any>(PropertyContext);
 	const [amenities, setAmenities] = useLocalStorage('amenities', getAmenities(propertyList));
 	const [properties, setProperties] = useLocalStorage('properties', propertyList); 
-	const [checked, setChecked] = useState(false); 
 	const [currentPage, setCurrentPage] = useLocalStorage('currentPage', 1);
 	const [propertiesPerPage, setPropertiesPerPage] = useLocalStorage('propertiesPerPage', 10);
 	const [searchInput, setSearchInput] = useState('');
@@ -31,7 +27,6 @@ const Home = () => {
 
 
 	const updateCheckStatus = (index: number) => {
-		setChecked(()=> !check);
 		const amenitiesStateList = amenities;
 		const changeCheckedAmenities = amenitiesStateList.map((amenity: any, currentIndex: any) => currentIndex === index ? { ...amenity, checked: !amenity.checked } : amenity
 		);
