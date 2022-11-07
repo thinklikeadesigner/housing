@@ -62,14 +62,11 @@ const Home = () => {
 	};
 
 
-	const handleOpen = () => {
-		setOpen(() => !open);
-	};
 
 
 	const applyFilters = () => {
-
-		let updatedPropertyList = propertyList;
+		const unmutatedPropertyList = JSON.stringify(propertyList);
+		let updatedPropertyList = JSON.parse(unmutatedPropertyList);
 
 		const amenityChecked = amenities.filter((item: any) => item.checked).map((item: any) => item.name.toLowerCase());
 
@@ -125,11 +122,11 @@ const Home = () => {
 			<div className="mr-10"></div>
 			<RangeInput min={0} max={40} onChange={() => console.log('hi')} />
 			<div className="mr-10"></div>
-			<DropDownContainer open={open} handleOpen={handleOpen} title={'Amenities'} >
+			<DropDownContainer title={'Amenities'} >
 				<AmenityMenu amenities={amenities} updateCheckStatus={updateCheckStatus} />
 			</DropDownContainer>
 			<div className="w-30"></div>
-			<DropDownContainer open={open} handleOpen={handleOpen}  title={'Results per Page'} >
+			<DropDownContainer  title={'Results per Page'} >
 				<ResultsCount handleResultsPerPage={handleResultsPerPage}/>
 			</DropDownContainer>
 		</FilterPanel>
