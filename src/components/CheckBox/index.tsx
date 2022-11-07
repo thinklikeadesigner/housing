@@ -9,15 +9,15 @@ type Props = {
 
 const CheckBox = ({ isChecked, label, checkHandler, index }: Props) => {
 	return (
-		<div>
+		<div className="">
 			<input
-				className=""
+				className="hover:cursor-pointer"
 				type="checkbox"
 				id={`checkbox-${index}`}
 				checked={isChecked}
 				onChange={checkHandler}
 			/>
-			<label className="ml-2 text-lg" htmlFor={`checkbox-${index}`}>{label}</label>
+			<label className="ml-2 text-lg hover:cursor-pointer" htmlFor={`checkbox-${index}`}>{label}</label>
 		</div>
 	);
 };
