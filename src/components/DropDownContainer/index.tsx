@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-import React, { cloneElement, useRef, useState } from 'react';
+import React, { cloneElement, useState } from 'react';
 import './styles.css';
 
 
