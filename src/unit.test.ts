@@ -4,7 +4,7 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
 import mockData from './mockData.json';
-import { getUnitsByType, getUnitsMinMax, getAvgSqft, unitHasAmenities, getUnitAmenities } from './components/helpers';
+import { getUnitsByType, getUnitsMinMax, getAvgSqft, unitHasAmenities, getUnitAmenities, unitRange, isUnitInRange } from './components/helpers';
 
 
 // jest --watch --collect-coverage
@@ -51,40 +51,40 @@ describe('should be able to get all units by their type', () => {
 describe('for range of occupants', () => {
 	test('studio', () => { 
 		const studio = getUnitsByType(data[0], 'studio');
-		const studioMin = getUnitsMinMax(studio).minOcc;
-		const studioMax = getUnitsMinMax(studio).maxOcc;
+		const studioMin = getUnitsMinMax(studio)[0];
+		const studioMax = getUnitsMinMax(studio)[1];
 		expect(studioMin).toBe(1);
 		expect(studioMax).toBe(3);
 		expect(studioMin).toBeLessThan(studioMax);
 	});
 	test('oneBdrm', () => { 
 		const oneBdrm = getUnitsByType(data[0], 'oneBdrm');
-		const oneBdrmMin = getUnitsMinMax(oneBdrm).minOcc;
-		const oneBdrmMax = getUnitsMinMax(oneBdrm).maxOcc;
+		const oneBdrmMin = getUnitsMinMax(oneBdrm)[0];
+		const oneBdrmMax = getUnitsMinMax(oneBdrm)[1];
 		expect(oneBdrmMin).toBe(1);
 		expect(oneBdrmMax).toBe(5);
 		expect(oneBdrmMin).toBeLessThan(oneBdrmMax);
 	});
 	test('twoBdrm', () => { 
 		const twoBdrm = getUnitsByType(data[0], 'twoBdrm');
-		const twoBdrmMin = getUnitsMinMax(twoBdrm).minOcc;
-		const twoBdrmMax = getUnitsMinMax(twoBdrm).maxOcc;
+		const twoBdrmMin = getUnitsMinMax(twoBdrm)[0];
+		const twoBdrmMax = getUnitsMinMax(twoBdrm)[1];
 		expect(twoBdrmMin).toBe(1);
 		expect(twoBdrmMax).toBe(8);
 		expect(twoBdrmMin).toBeLessThan(twoBdrmMax);
 	});
 	test('threeBdrm', () => { 
 		const threeBdrm = getUnitsByType(data[0], 'threeBdrm');
-		const threeBdrmMin = getUnitsMinMax(threeBdrm).minOcc;
-		const threeBdrmMax = getUnitsMinMax(threeBdrm).maxOcc;
+		const threeBdrmMin = getUnitsMinMax(threeBdrm)[0];
+		const threeBdrmMax = getUnitsMinMax(threeBdrm)[1];
 		expect(threeBdrmMin).toBe(2);
 		expect(threeBdrmMax).toBe(11);
 		expect(threeBdrmMin).toBeLessThan(threeBdrmMax);
 	});
 	test('fourBdrm', () => { 
 		const fourBdrm = getUnitsByType(data[0], 'fourBdrm');
-		const fourBdrmMin = getUnitsMinMax(fourBdrm).minOcc;
-		const  fourBdrmMax = getUnitsMinMax(fourBdrm).maxOcc;
+		const fourBdrmMin = getUnitsMinMax(fourBdrm)[0];
+		const  fourBdrmMax = getUnitsMinMax(fourBdrm)[1];
 		expect(fourBdrmMin).toBe(4);
 		expect(fourBdrmMax).toBe(12);
 		expect(fourBdrmMin).toBeLessThan(fourBdrmMax);
@@ -286,5 +286,278 @@ describe('filter amenities by unit', () => {
 		const fourBdrm = getUnitsByType(data[0], 'fourBdrm');
 		const fourBdrmSqFt = getAvgSqft(fourBdrm);
 		expect(fourBdrmSqFt).toBe(3022);
+	});
+});
+
+describe('filter range by unit', () => {
+	test('should return min and max from a single unit', () => {
+
+		const unit = {
+			type: 'studio',
+			minOccupancy: 1,
+			maxOccupancy: 3,
+			sqft: 1633,
+			amenities: [
+				'fireplace',
+				'air conditioning',
+				'accessible bathroom',
+				'elevator',
+				'wheel chair access',
+				'washer & dryer',
+			]
+		};
+
+		expect(unitRange(unit)).toEqual([1,3]);
+
+	});
+	test('test if unit is within range, return true bc unit max is less than selected max', () => {
+
+		const unit = {
+			type: 'studio',
+			minOccupancy: 1,
+			maxOccupancy: 3,
+			sqft: 1633,
+			amenities: [
+				'fireplace',
+				'air conditioning',
+				'accessible bathroom',
+				'elevator',
+				'wheel chair access',
+				'washer & dryer',
+			]
+		};
+		const isUnitInRange = (unitRange: any, range: any) => {
+			if (range[0] <= unitRange[0] && range[1] >= unitRange[1]) {
+
+				return true;
+			}
+			return false;
+		};
+
+		expect(isUnitInRange(unitRange(unit), [1,6])).toBeTruthy();
+
+	});
+	test('test if unit is within range, return false bc unit max is greater than selected max', () => {
+
+		const unit = {
+			type: 'studio',
+			minOccupancy: 1,
+			maxOccupancy: 3,
+			sqft: 1633,
+			amenities: [
+				'fireplace',
+				'air conditioning',
+				'accessible bathroom',
+				'elevator',
+				'wheel chair access',
+				'washer & dryer',
+			]
+		};
+		const isUnitInRange = (unitRange: any, range: any) => {
+			if (range[0] <= unitRange[0] && range[1] >= unitRange[1]) {
+				return true;
+			}
+			return false;
+		};
+
+		expect(isUnitInRange(unitRange(unit), [1,2])).toBeFalsy();
+
+	});
+	test('test if unit is within range, return false bc unit min is less than selected min', () => {
+
+		const unit = {
+			type: 'studio',
+			minOccupancy: 1,
+			maxOccupancy: 3,
+			sqft: 1633,
+			amenities: [
+				'fireplace',
+				'air conditioning',
+				'accessible bathroom',
+				'elevator',
+				'wheel chair access',
+				'washer & dryer',
+			]
+		};
+		const isUnitInRange = (unitRange: any, range: any) => {
+			if (range[0] <= unitRange[0] && range[1] >= unitRange[1]) {
+				return true;
+			}
+			return false;
+		};
+
+		expect(isUnitInRange(unitRange(unit), [3,4])).toBeFalsy();
+
+	});
+
+	test('test if unit is within range, return true bc unit min is greater than selected min', () => {
+
+		const unit = {
+			type: 'studio',
+			minOccupancy: 2,
+			maxOccupancy: 3,
+			sqft: 1633,
+			amenities: [
+				'fireplace',
+				'air conditioning',
+				'accessible bathroom',
+				'elevator',
+				'wheel chair access',
+				'washer & dryer',
+			]
+		};
+		const isUnitInRange = (unitRange: any, range: any) => {
+			if (range[0] <= unitRange[0] && range[1] >= unitRange[1]) {
+				return true;
+			}
+			return false;
+		};
+
+		expect(isUnitInRange(unitRange(unit), [1,4])).toBeTruthy();
+
+	});
+	test('should not filter out units because all are within range', () => {
+		const units = [{
+			type: 'studio',
+			minOccupancy: 1,
+			maxOccupancy: 5,
+			sqft: 1633,
+			amenities: [
+				'fireplace',
+				'air conditioning',
+				'accessible bathroom',
+				'elevator',
+				'wheel chair access',
+				'washer & dryer',
+			]
+		},
+		{
+			type: 'studio',
+			minOccupancy: 2,
+			maxOccupancy: 6,
+			sqft: 1633,
+			amenities: [
+				'fireplace',
+				'air conditioning',
+				'accessible bathroom',
+				'elevator',
+				'wheel chair access',
+				'washer & dryer',
+			]
+		},
+		{
+			type: 'studio',
+			minOccupancy: 1,
+			maxOccupancy: 8,
+			sqft: 1633,
+			amenities: [
+				'fireplace',
+				'air conditioning',
+				'accessible bathroom',
+				'elevator',
+				'wheel chair access',
+				'washer & dryer',
+			]
+		}];
+
+		const filtered = units.filter((unit: any) => isUnitInRange(unitRange(unit), [1,20]));
+
+		expect(filtered.length).toBe(3);
+	});
+	test('should filter out units that have more than 7', () => {
+		const units = [{
+			type: 'studio',
+			minOccupancy: 1,
+			maxOccupancy: 5,
+			sqft: 1633,
+			amenities: [
+				'fireplace',
+				'air conditioning',
+				'accessible bathroom',
+				'elevator',
+				'wheel chair access',
+				'washer & dryer',
+			]
+		},
+		{
+			type: 'studio',
+			minOccupancy: 2,
+			maxOccupancy: 6,
+			sqft: 1633,
+			amenities: [
+				'fireplace',
+				'air conditioning',
+				'accessible bathroom',
+				'elevator',
+				'wheel chair access',
+				'washer & dryer',
+			]
+		},
+		{
+			type: 'studio',
+			minOccupancy: 1,
+			maxOccupancy: 8,
+			sqft: 1633,
+			amenities: [
+				'fireplace',
+				'air conditioning',
+				'accessible bathroom',
+				'elevator',
+				'wheel chair access',
+				'washer & dryer',
+			]
+		}];
+
+		const filtered = units.filter((unit: any) => isUnitInRange(unitRange(unit), [1,7]));
+
+		expect(filtered.length).toBe(2);
+	});
+	test('should filter out units that dont have at least 3', () => {
+		const units = [{
+			type: 'studio',
+			minOccupancy: 1,
+			maxOccupancy: 5,
+			sqft: 1633,
+			amenities: [
+				'fireplace',
+				'air conditioning',
+				'accessible bathroom',
+				'elevator',
+				'wheel chair access',
+				'washer & dryer',
+			]
+		},
+		{
+			type: 'studio',
+			minOccupancy: 3,
+			maxOccupancy: 9,
+			sqft: 1633,
+			amenities: [
+				'fireplace',
+				'air conditioning',
+				'accessible bathroom',
+				'elevator',
+				'wheel chair access',
+				'washer & dryer',
+			]
+		},
+		{
+			type: 'studio',
+			minOccupancy: 2,
+			maxOccupancy: 8,
+			sqft: 1633,
+			amenities: [
+				'fireplace',
+				'air conditioning',
+				'accessible bathroom',
+				'elevator',
+				'wheel chair access',
+				'washer & dryer',
+			]
+		}];
+
+		const filtered = units.filter((unit: any) => isUnitInRange(unitRange(unit), [3,10]));
+
+		expect(filtered.length).toBe(1);
 	});
 });

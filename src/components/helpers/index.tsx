@@ -46,7 +46,7 @@ export const getUnitsMinMax = (units: any) => {
 	const maxOcc = units.map((i: { maxOccupancy: any; }) => i.maxOccupancy);
 	const absMax = Math.max(...maxOcc);
 
-	return {minOcc: absMin, maxOcc: absMax};
+	return [absMin, absMax];
 };
 
 export const getAvgSqft = (units: any) => {
@@ -54,4 +54,13 @@ export const getAvgSqft = (units: any) => {
 	return Math.floor(sqftList.reduce((a:any, b:any) => a + b) / sqftList.length);
 };
 
+export const unitRange = (unit: any) => {
+	return [unit.minOccupancy, unit.maxOccupancy];
+};
 
+export const isUnitInRange = (unitRange: any, range: any) => {
+	if (range[0] <= unitRange[0] && range[1] >= unitRange[1]) {
+		return true;
+	}
+	return false;
+};
