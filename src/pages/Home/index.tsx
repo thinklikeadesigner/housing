@@ -81,8 +81,7 @@ const Home = () => {
 					const filteredProperty = current.units.filter((unit: any) => unitHasAmenities(getUnitAmenities(unit), amenityChecked));
 					current.units = filteredProperty;
 					reduceArr.push(current);
-					const h = reduceArr.length;
-					console.log({reduceArr});
+
 				}
 			}, reduceArr);
 
@@ -106,7 +105,6 @@ const Home = () => {
 		}
 
 		updatedPropertyList = alphaSort(updatedPropertyList);
-		console.log({updatedPropertyList});
 		
 		setProperties(updatedPropertyList);
 	};

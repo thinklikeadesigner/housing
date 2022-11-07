@@ -2,15 +2,14 @@ import React from 'react';
 import NoResults from '../NoResults/index';
 import UnitList from '../UnitList';
 
-const PropertyList = ( { properties, children, amenities }: any ) => {
+const PropertyList = ( { properties, children}: any ) => {
 
 	if (properties.length == 0) return <NoResults />;
 
-	console.log(amenities);
 	
 
 	return <div className="py-6">
-		{properties.map((i: any, amenities: any) => (
+		{properties.map((i: any) => (
 			<div  className="flex justify-center py-6" key={i.id}>
 				<div className="overflow-hidden bg-white rounded">
 					<div className="flex flex-col md:flex-row center">
@@ -32,7 +31,7 @@ const PropertyList = ( { properties, children, amenities }: any ) => {
 								<button className="px-4 py-2 mr-2 text-white bg-blue-500 rounded hover:bg-blue-400">Listing Label</button>
 							</div>
 							<div className="pt-5 pb-1 border-t border-gray-600"></div>
-							<UnitList amenities={amenities} id={i.id} name={i.name} picture={i.picture} units={i.units} />
+							<UnitList id={i.id} name={i.name} picture={i.picture} units={i.units} />
 						</div>
 					</div>
 				</div>
