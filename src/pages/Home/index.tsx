@@ -26,7 +26,7 @@ const Home = () => {
 	const [selectedMin, setSelectedMin] = useLocalStorage('selectedMin', overAllMin);
 	const [selectedMax, setSelectedMax] = useLocalStorage('selectedMax', overAllMax);
 	const [isResultSelected, setIsResultSelected] = useState(false);
-	const [count, setCount] = useState(0);
+	const [count, setCount] = useLocalStorage('count',0);
 
 
 
