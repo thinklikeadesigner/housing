@@ -20,7 +20,7 @@ export const Pagination = ({checkIfEmpty,isResultSelected, handleResultsPerPage,
 
 	return <section className="py-8">
 
-		<nav className="pb-20">
+		<nav className="pt-20">
 			<div className="flex justify-end">
 			</div>
 			<ul className="flex justify-center align-middle list-none">

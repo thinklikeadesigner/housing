@@ -44,10 +44,12 @@
   
   .slider__left-value {
     left: 6px;
+    color: black;
   }
   
   .slider__right-value {
     right: -4px;
+    color: black;
   }
   
   /* Removing the default appearance */

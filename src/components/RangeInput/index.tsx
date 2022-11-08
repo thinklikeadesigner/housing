@@ -66,42 +66,46 @@ const RangeInput: FC<RangeInputProps> = ({
 	}, [minVal, maxVal]);
   
 	return (
-		<div className="py-8">
-			<input
-				type="range"
-				min={min}
-				max={max}
-				value={minVal}
-				ref={minValRef}
-				onChange={(event: ChangeEvent<HTMLInputElement>) => {
-					const value = Math.min(+event.target.value, maxVal - 1);
-					setMinVal(value);
-					event.target.value = value.toString();
-				}}
-				className={classnames('thumb thumb--zindex-3', {
-					'thumb--zindex-5': minVal > max - 100
-				})}
-			/>
-			<input
-				type="range"
-				min={min}
-				max={max}
-				value={maxVal}
-				ref={maxValRef}
-				onChange={(event: ChangeEvent<HTMLInputElement>) => {
-					const value = Math.max(+event.target.value, minVal + 1);
-					setMaxVal(value);
-					event.target.value = value.toString();
-				}}
-				className="thumb thumb--zindex-4"
-			/>
-			<div className="slider">
-				<div className="slider__track"></div>
-				<div ref={range} className="slider__range"></div>
-				<div className="slider__left-value">{minVal}</div>
-				<div className="slider__right-value">{maxVal}</div>
+		<div className="flex items-center justify-start md:py-8">
+			<p className="pr-2 m-0 text-xs text-center md:pr-8 md:text-lg">min occupants</p>
+			<div className="py-8">
+				<input
+					type="range"
+					min={min}
+					max={max}
+					value={minVal}
+					ref={minValRef}
+					onChange={(event: ChangeEvent<HTMLInputElement>) => {
+						const value = Math.min(+event.target.value, maxVal - 1);
+						setMinVal(value);
+						event.target.value = value.toString();
+					}}
+					className={classnames('thumb thumb--zindex-3', {
+						'thumb--zindex-5': minVal > max - 100
+					})}
+				/>
+				<input
+					type="range"
+					min={min}
+					max={max}
+					value={maxVal}
+					ref={maxValRef}
+					onChange={(event: ChangeEvent<HTMLInputElement>) => {
+						const value = Math.max(+event.target.value, minVal + 1);
+						setMaxVal(value);
+						event.target.value = value.toString();
+					}}
+					className="thumb thumb--zindex-4"
+				/>
+				<div className="slider">
+					<div className="slider__track"></div>
+					<div ref={range} className="slider__range"></div>
+					<div className="slider__left-value">{minVal}</div>
+					<div className="slider__right-value">{maxVal}</div>
+				</div>
 			</div>
-		</div>
+			<p className="pl-2 text-xs text-center md:pl-8 md:text-lg">max occupants</p></div>
+			
 	);
 };
   
