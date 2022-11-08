@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import left from '../../left-arrow.png';
 import right from '../../right-arrow.png';
-export const Pagination = ({propertiesPerPage, currentPage, totalProperties, paginate, children}: any) => {
+export const Pagination = ({checkIfEmpty, propertiesPerPage, currentPage, totalProperties, paginate, children}: any) => {
 	
 	const pageNumbers = [];
 	for (let i = 1; i <= Math.ceil(totalProperties / propertiesPerPage); i++) {
@@ -10,6 +10,10 @@ export const Pagination = ({propertiesPerPage, currentPage, totalProperties, pag
 	}
 
 
+	useEffect(() => {
+		checkIfEmpty();
+	}, []);
+	
 	
 
 	return <section className="py-8">
@@ -19,10 +23,10 @@ export const Pagination = ({propertiesPerPage, currentPage, totalProperties, pag
 				{children}
 			</div>
 			<ul className="flex justify-center align-middle list-none">
-				<div className="w-8 mx-4">
+				{/* <div className="w-8 mx-4">
 					<img src={left} alt="" className="bg-center bg-contain" />
 
-				</div>
+				</div> */}
 				{pageNumbers.map(number => (
 					<li key={number} className="px-2">
 						{number === currentPage ? <a className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-400" onClick={() => paginate(number)} href="!#" >
@@ -32,9 +36,9 @@ export const Pagination = ({propertiesPerPage, currentPage, totalProperties, pag
 						</a>}
 					</li>
 				))}
-				<div className="w-8 mx-4">
+				{/* <div className="w-8 mx-4">
 					<img src={right} alt="" className="bg-center bg-contain" />
-				</div>
+				</div> */}
 			</ul>
 		</nav>
 	</section>

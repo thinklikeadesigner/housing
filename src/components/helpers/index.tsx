@@ -3,6 +3,8 @@ export const alphaSort = (data: any) => {
 	return data.sort((a: any, b: any) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
 };
 
+
+
 export const getAmenities = (housingdata: any) => {
 	const amenitiesCheckBoxes: any = [];
 	const amenitiesSet = new Set(housingdata.map((i: { units: any[]; }) => i.units.map(i => i.amenities)).flat().flat());
@@ -41,6 +43,10 @@ export const getUnitsMinMax = (units: any) => {
 	const absMax = Math.max(...maxOcc);
 
 	return [absMin, absMax];
+};
+
+export const getOverallMinMax = (housingdata: any) => {
+	return getUnitsMinMax(housingdata.map((i: { units: any[]; }) => i.units.map(i => i)).flat().flat());
 };
 
 export const getAvgSqft = (units: any) => {

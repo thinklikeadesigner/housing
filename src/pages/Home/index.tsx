@@ -8,7 +8,7 @@ import { PropertyContext } from '../../context/PropertyContext/index';
 import ResultsCount from '../../components/ResultsCount/index';
 import FilterPanel from '../../components/FilterPanel';
 import RangeInput from '../../components/RangeInput/index';
-import { alphaSort, getAmenities, getUnitAmenities, isUnitInRange, unitHasAmenities, unitRange } from '../../components/helpers';
+import { alphaSort, getAmenities, getOverallMinMax, getUnitAmenities, isUnitInRange, unitHasAmenities, unitRange } from '../../components/helpers';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 
@@ -16,14 +16,18 @@ import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const Home = () => {
 	const propertyList = useContext<any>(PropertyContext);
+	const overAllMin = getOverallMinMax(propertyList)[0];
+	const overAllMax = getOverallMinMax(propertyList)[1];
 	const [amenities, setAmenities] = useLocalStorage('amenities', getAmenities(propertyList));
 	const [properties, setProperties] = useLocalStorage('properties', propertyList); 
 	const [currentPage, setCurrentPage] = useLocalStorage('currentPage', 1);
 	const [propertiesPerPage, setPropertiesPerPage] = useLocalStorage('propertiesPerPage', 10);
 	const [searchInput, setSearchInput] = useState('');
-	const [selectedMin, setSelectedMin] = useLocalStorage('selectedMin', 1);
-	const [selectedMax, setSelectedMax] = useLocalStorage('selectedMax', 14);
+	const [selectedMin, setSelectedMin] = useLocalStorage('selectedMin', overAllMin);
+	const [selectedMax, setSelectedMax] = useLocalStorage('selectedMax', overAllMax);
 	const [isResultSelected, setIsResultSelected] = useState(false);
+
+
 
 	const getMin = ((min: any) => {
 		setSelectedMin(min);
@@ -45,6 +49,13 @@ const Home = () => {
 	const indexOfLastProperty = currentPage * propertiesPerPage;
 	const indexOfFirstProperty = indexOfLastProperty - propertiesPerPage;
 	const currentProperties = properties.slice(indexOfFirstProperty, indexOfLastProperty);
+
+	const checkIfEmpty = () => {
+		if (currentProperties.length === 0)
+		{
+			setCurrentPage(1);
+		}
+	};
 
 
 	// for text search
@@ -130,18 +141,19 @@ const Home = () => {
 		<FilterPanel>
 			<SearchBar value={searchInput} changeInput={handleChangeInput} />
 			<div className="lg:mr-10"></div>
-			<RangeInput getMin={getMin} getMax={getMax} min={1} max={14} />
+			<RangeInput getMin={getMin} getMax={getMax} min={overAllMin} max={overAllMax} />
 			<div className="lg:mr-10"></div>
 			<DropDownContainer title={'Amenities'} >
 				<AmenityMenu amenities={amenities} updateCheckStatus={updateCheckStatus} />
 			</DropDownContainer>
 			<div className="w-30"></div>
-			<DropDownContainer isResultSelected={isResultSelected} title={'Results per Page'} >
+			<DropDownContainer isResultSelected={isResultSelected} title={`${propertiesPerPage} Results per Page `} >
 				<ResultsCount  handleResultsPerPage={handleResultsPerPage}/>
 			</DropDownContainer>
 		</FilterPanel>
+
 		<PropertyList properties={currentProperties} amenities={amenities} >
-			<Pagination propertiesPerPage={propertiesPerPage} currentPage={currentPage} totalProperties={properties.length} paginate={paginate}/>
+			<Pagination checkIfEmpty={checkIfEmpty} propertiesPerPage={propertiesPerPage} currentPage={currentPage} totalProperties={properties.length} paginate={paginate}/>
 		</PropertyList>
 	</div>;
 };

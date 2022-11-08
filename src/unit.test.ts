@@ -561,3 +561,10 @@ describe('filter range by unit', () => {
 		expect(filtered.length).toBe(1);
 	});
 });
+
+describe('getting overall max and min for range slider', () => {
+	test('should get max and min from all units', () => {
+		const a = data.map((i: { units: any[]; }) => i.units.map(i => i)).flat().flat();
+		expect(getUnitsMinMax(a)).toEqual([1,13]);
+	});
+});
