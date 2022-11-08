@@ -4,7 +4,7 @@ import './styles.css';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 
 	
-const DropDownContainer = ({ children, title, isResultSelected }: any) => {
+const DropDownContainer = ({ children, count, title, isResultSelected }: any) => {
 	const [open, setOpen] = useState(false);
 	const handleClickOutside = () => {
 		setOpen(false);
@@ -34,7 +34,7 @@ const DropDownContainer = ({ children, title, isResultSelected }: any) => {
 
 	return (
 		<div ref={ref} onClick={handleHeaderClick} className="relative w-full py-8 text-lg">
-			<button onClick={handleOpen}  className="px-4 py-2 mr-2 text-white bg-blue-500 rounded w-max hover:bg-blue-400"> {title}
+			<button onClick={handleOpen}  className="px-4 py-2 mr-2 text-white bg-blue-500 rounded w-max hover:bg-blue-400"> {`${title}: ${count}`}
 	
 			</button>
 

@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import left from '../../left-arrow.png';
 import right from '../../right-arrow.png';
-export const Pagination = ({checkIfEmpty, propertiesPerPage, currentPage, totalProperties, paginate, children}: any) => {
+import DropDownContainer from '../DropDownContainer';
+import ResultsCount from '../ResultsCount';
+export const Pagination = ({checkIfEmpty,isResultSelected, handleResultsPerPage, propertiesPerPage, currentPage, totalProperties, paginate, children}: any) => {
 	
 	const pageNumbers = [];
 	for (let i = 1; i <= Math.ceil(totalProperties / propertiesPerPage); i++) {
@@ -18,15 +20,10 @@ export const Pagination = ({checkIfEmpty, propertiesPerPage, currentPage, totalP
 
 	return <section className="py-8">
 
-		<nav className="">
+		<nav className="pb-20">
 			<div className="flex justify-end">
-				{children}
 			</div>
 			<ul className="flex justify-center align-middle list-none">
-				{/* <div className="w-8 mx-4">
-					<img src={left} alt="" className="bg-center bg-contain" />
-
-				</div> */}
 				{pageNumbers.map(number => (
 					<li key={number} className="px-2">
 						{number === currentPage ? <a className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-400" onClick={() => paginate(number)} href="!#" >
@@ -36,11 +33,10 @@ export const Pagination = ({checkIfEmpty, propertiesPerPage, currentPage, totalP
 						</a>}
 					</li>
 				))}
-				{/* <div className="w-8 mx-4">
-					<img src={right} alt="" className="bg-center bg-contain" />
-				</div> */}
 			</ul>
+
 		</nav>
+		{children}
 	</section>
 	;
 };

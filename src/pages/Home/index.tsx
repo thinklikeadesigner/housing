@@ -26,6 +26,7 @@ const Home = () => {
 	const [selectedMin, setSelectedMin] = useLocalStorage('selectedMin', overAllMin);
 	const [selectedMax, setSelectedMax] = useLocalStorage('selectedMax', overAllMax);
 	const [isResultSelected, setIsResultSelected] = useState(false);
+	const [count, setCount] = useState(0);
 
 
 
@@ -43,7 +44,12 @@ const Home = () => {
 		setAmenities(
 			changeCheckedAmenities
 		);
+		const count = changeCheckedAmenities.filter((item:any) => 	item.checked === true);
+
+		setCount(count.length);
 	};
+
+	
     
 	// to calculate which properties go on each page
 	const indexOfLastProperty = currentPage * propertiesPerPage;
@@ -77,8 +83,8 @@ const Home = () => {
 
 
 	const applyFilters = () => {
-
 		
+
 		const unmutatedPropertyList = JSON.stringify(propertyList);
 		let updatedPropertyList = JSON.parse(unmutatedPropertyList);
 		
@@ -132,9 +138,9 @@ const Home = () => {
 
 	useEffect(() => {
 		applyFilters();
-
+		console.log(count);
 		return setIsResultSelected(false);
-	}, [amenities, searchInput, selectedMin, selectedMax, isResultSelected]);
+	}, [amenities, searchInput, selectedMin, selectedMax, isResultSelected, count]);
     
 
 	return <div className="flex flex-col">
@@ -143,15 +149,15 @@ const Home = () => {
 			<div className="lg:mr-10"></div>
 			<RangeInput getMin={getMin} getMax={getMax} min={overAllMin} max={overAllMax} />
 			<div className="lg:mr-10"></div>
-			<DropDownContainer title={'Amenities'} >
+			<DropDownContainer count={count} title={'Amenities'} >
 				<AmenityMenu amenities={amenities} updateCheckStatus={updateCheckStatus} />
 			</DropDownContainer>
 			<div className="w-30"></div>
-			<DropDownContainer isResultSelected={isResultSelected} title={`${propertiesPerPage} Results per Page `} >
+			<DropDownContainer isResultSelected={isResultSelected} title='Results per Page' count={propertiesPerPage} >
 				<ResultsCount  handleResultsPerPage={handleResultsPerPage}/>
 			</DropDownContainer>
 		</FilterPanel>
-
+		<Pagination checkIfEmpty={checkIfEmpty} propertiesPerPage={propertiesPerPage} currentPage={currentPage} totalProperties={properties.length} paginate={paginate}/>
 		<PropertyList properties={currentProperties} amenities={amenities} >
 			<Pagination checkIfEmpty={checkIfEmpty} propertiesPerPage={propertiesPerPage} currentPage={currentPage} totalProperties={properties.length} paginate={paginate}/>
 		</PropertyList>
