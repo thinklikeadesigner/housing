@@ -10,11 +10,9 @@ import FilterPanel from '../../components/FilterPanel';
 import RangeInput from '../../components/RangeInput/index';
 import { alphaSort, getAmenities, getUnitAmenities, isUnitInRange, unitHasAmenities, unitRange } from '../../components/helpers';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
-import { isMinusToken } from 'typescript';
 
 
 
-// type Props = {};
 
 const Home = () => {
 	const propertyList = useContext<any>(PropertyContext);
@@ -47,7 +45,6 @@ const Home = () => {
 	const indexOfFirstProperty = indexOfLastProperty - propertiesPerPage;
 	const currentProperties = properties.slice(indexOfFirstProperty, indexOfLastProperty);
 
-	// const handleChangeRange = (_e: { target: { value: any } }, value: any) => setSelectedRange(value);
 
 	// for text search
 	const handleChangeInput = (_e: { target: { value: any } }) => setSearchInput(_e.target.value);
@@ -67,8 +64,6 @@ const Home = () => {
 
 
 	const applyFilters = () => {
-		console.log(selectedMax);
-		console.log(selectedMin);
 
 		
 		const unmutatedPropertyList = JSON.stringify(propertyList);
@@ -130,7 +125,7 @@ const Home = () => {
 		<FilterPanel>
 			<SearchBar value={searchInput} changeInput={handleChangeInput} />
 			<div className="mr-10"></div>
-			<RangeInput getMin={getMin} getMax={getMax} min={1} max={14} onChange={() => console.log('hi')} />
+			<RangeInput getMin={getMin} getMax={getMax} min={1} max={14} />
 			<div className="mr-10"></div>
 			<DropDownContainer title={'Amenities'} >
 				<AmenityMenu amenities={amenities} updateCheckStatus={updateCheckStatus} />

@@ -14,7 +14,6 @@ const Dropdown = ({ trigger, menu }: any) => {
 	const [open, setOpen] = useState(false);
 
 	const handleOpen = () => {
-		console.log('open');
 		setOpen(!open);
 	};
 

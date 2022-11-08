@@ -1,9 +1,6 @@
 
 
 
-
-
-
 Hi Rebecca.
 
 Thanks again for taking the time to chat with us. Based on that, we'd like to invite you to the next step in the process: a skills assessment. In addition to letting you show off your coding and other skills, the process will be a good way for you to get a sense of how we think about and work through problems.
