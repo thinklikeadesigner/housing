@@ -12,13 +12,17 @@ import './styles.css';
   interface RangeInputProps {
     min: number;
     max: number;
-    onChange: any;
+	onChange: any;
+	getMin: any;
+	getMax: any;
   }
   
 const RangeInput: FC<RangeInputProps> = ({
 	min,
 	max,
-	onChange
+	onChange,
+	getMin,
+	getMax
 }) => {
 	const [minVal, setMinVal] = useState(min);
 	const [maxVal, setMaxVal] = useState(max);
@@ -60,6 +64,8 @@ const RangeInput: FC<RangeInputProps> = ({
 	// Get min and max values when their state changes
 	useEffect(() => {
 		onChange({ min: minVal, max: maxVal });
+		getMin(minVal);
+		getMax(maxVal);
 	}, [minVal, maxVal, onChange]);
   
 	return (

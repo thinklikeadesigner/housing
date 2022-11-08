@@ -10,6 +10,7 @@ import FilterPanel from '../../components/FilterPanel';
 import RangeInput from '../../components/RangeInput/index';
 import { alphaSort, getAmenities, getUnitAmenities, isUnitInRange, unitHasAmenities, unitRange } from '../../components/helpers';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { isMinusToken } from 'typescript';
 
 
 
@@ -22,8 +23,15 @@ const Home = () => {
 	const [currentPage, setCurrentPage] = useLocalStorage('currentPage', 1);
 	const [propertiesPerPage, setPropertiesPerPage] = useLocalStorage('propertiesPerPage', 10);
 	const [searchInput, setSearchInput] = useState('');
-	const [selectedRange, setSelectedRange] = useState([1000, 5000]);
+	const [selectedMin, setSelectedMin] = useState(1);
+	const [selectedMax, setSelectedMax] = useState(14);
 
+	const getMin = ((min: any) => {
+		setSelectedMin(min);
+	});
+	const getMax = ((max: any) => {
+		setSelectedMax(max);
+	});
 
 	const updateCheckStatus = (index: number) => {
 		const amenitiesStateList = amenities;
@@ -39,7 +47,7 @@ const Home = () => {
 	const indexOfFirstProperty = indexOfLastProperty - propertiesPerPage;
 	const currentProperties = properties.slice(indexOfFirstProperty, indexOfLastProperty);
 
-	const handleChangeRange = (_e: { target: { value: any } }, value: any) => setSelectedRange(value);
+	// const handleChangeRange = (_e: { target: { value: any } }, value: any) => setSelectedRange(value);
 
 	// for text search
 	const handleChangeInput = (_e: { target: { value: any } }) => setSearchInput(_e.target.value);
@@ -59,57 +67,48 @@ const Home = () => {
 
 
 	const applyFilters = () => {
+		console.log(selectedMax);
+		console.log(selectedMin);
+
+		
 		const unmutatedPropertyList = JSON.stringify(propertyList);
 		let updatedPropertyList = JSON.parse(unmutatedPropertyList);
-
+		
 		const amenityChecked = amenities.filter((item: any) => item.checked).map((item: any) => item.name.toLowerCase());
-
+		
 		if (amenityChecked.length !== 0) {
-
+			
 			const reduceArr: any[] = [];
 			updatedPropertyList.reduce((prev: any, current: any) => {
-
+				
 				const filteredUnits = current.units.filter((unit: any) => unitHasAmenities(getUnitAmenities(unit), amenityChecked));
 				if (filteredUnits.length) {
-
+					
 					const filteredProperty = current.units.filter((unit: any) => unitHasAmenities(getUnitAmenities(unit), amenityChecked));
 					current.units = filteredProperty;
 					reduceArr.push(current);
-
+					
 				}
 			}, reduceArr);
 
-			// reduceArr.reduce((prev: any, current: any) => {
-			//  if (current.length !== 0) {
-                    
-			//      deleteEmpties.push(current);
-			//  }
-			// },deleteEmpties);
-
+					
 			updatedPropertyList = reduceArr;
 		}
-		// const minRange = selectedRange[0];
-		// const maxRange = selectedRange[1];
+		const minRange = selectedMin;
+		const maxRange = selectedMax;
 		const anotherArr: any[] = [];
-		// let  filtered: any[] = [];
 
-		// updatedPropertyList.reduce((prev: any, current: any) => {
+		updatedPropertyList.reduce((prev: any, current: any) => {
 
-		// 	filtered = current.units.map((unit: any) => isUnitInRange(unitRange(unit), [minRange, maxRange]));
-		// 	if (filtered.length) {
-		// 		const filteredUnits = current.units.filter((unit: any) => isUnitInRange(unitRange(unit), [minRange, maxRange]));
-		// 		current.units = filteredUnits;
-		// 		anotherArr.push(current);
-		// 	}
-
-		// 	console.log({ anotherArr });
-		// }, anotherArr
-		// );
-		// updatedPropertyList = anotherArr;
-		console.log({ minRange });
-		console.log({ maxRange });
-
-		// updatedPropertyList = updatedPropertyList.filter((item: any) => item.range >= minRange && item.Range <= maxRange);
+			const filtered = current.units.map((unit: any) => isUnitInRange(unitRange(unit), [minRange, maxRange]));
+			if (filtered.length) {
+				const filteredUnits = current.units.filter((unit: any) => isUnitInRange(unitRange(unit), [minRange, maxRange]));
+				current.units = filteredUnits;
+				anotherArr.push(current);
+			}
+		}, anotherArr
+		);
+		updatedPropertyList = anotherArr;
 
 		if (searchInput) {
 			updatedPropertyList = updatedPropertyList.filter(
@@ -124,14 +123,14 @@ const Home = () => {
 
 	useEffect(() => {
 		applyFilters();
-	}, [amenities, searchInput]);
+	}, [amenities, searchInput, selectedMin, selectedMax]);
     
 
 	return <div className="flex flex-col">
 		<FilterPanel>
 			<SearchBar value={searchInput} changeInput={handleChangeInput} />
 			<div className="mr-10"></div>
-			<RangeInput min={1} max={14} onChange={() => handleChangeRange} />
+			<RangeInput getMin={getMin} getMax={getMax} min={1} max={14} onChange={() => console.log('hi')} />
 			<div className="mr-10"></div>
 			<DropDownContainer title={'Amenities'} >
 				<AmenityMenu amenities={amenities} updateCheckStatus={updateCheckStatus} />
