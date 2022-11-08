@@ -15,13 +15,3 @@
 
 ### amenities
 ![ezgif com-gif-maker (4)](https://user-images.githubusercontent.com/58955802/200454523-22d7ee46-0b83-436c-b717-e2b41a90399a.gif)
-
-
-### If I had more time:
-- I would like to fix clicking outside the dropdowns to close them. Or closing on selection. 
-- User is taken to the last page that has results if the current page has no results.
-- Removing properties from list if there are no units available, this works for search and amenities but not range yet.
-
-## I'll be working on these bugs, so they might be fixed by the time you review the project.
-
-
