@@ -138,7 +138,6 @@ const Home = () => {
 
 	useEffect(() => {
 		applyFilters();
-		console.log(count);
 		return setIsResultSelected(false);
 	}, [amenities, searchInput, selectedMin, selectedMax, isResultSelected, count]);
     
