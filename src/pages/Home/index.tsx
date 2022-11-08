@@ -23,6 +23,7 @@ const Home = () => {
 	const [searchInput, setSearchInput] = useState('');
 	const [selectedMin, setSelectedMin] = useLocalStorage('selectedMin', 1);
 	const [selectedMax, setSelectedMax] = useLocalStorage('selectedMax', 14);
+	const [isResultSelected, setIsResultSelected] = useState(false);
 
 	const getMin = ((min: any) => {
 		setSelectedMin(min);
@@ -58,6 +59,7 @@ const Home = () => {
 	// results per page
 	const handleResultsPerPage = (num: any) => {
 		setPropertiesPerPage(num);   // get current properties
+		setIsResultSelected(true);
 	};
 
 
@@ -119,7 +121,9 @@ const Home = () => {
 
 	useEffect(() => {
 		applyFilters();
-	}, [amenities, searchInput, selectedMin, selectedMax]);
+
+		return setIsResultSelected(false);
+	}, [amenities, searchInput, selectedMin, selectedMax, isResultSelected]);
     
 
 	return <div className="flex flex-col">
@@ -132,8 +136,8 @@ const Home = () => {
 				<AmenityMenu amenities={amenities} updateCheckStatus={updateCheckStatus} />
 			</DropDownContainer>
 			<div className="w-30"></div>
-			<DropDownContainer  title={'Results per Page'} >
-				<ResultsCount handleResultsPerPage={handleResultsPerPage}/>
+			<DropDownContainer isResultSelected={isResultSelected} title={'Results per Page'} >
+				<ResultsCount  handleResultsPerPage={handleResultsPerPage}/>
 			</DropDownContainer>
 		</FilterPanel>
 		<PropertyList properties={currentProperties} amenities={amenities} >
