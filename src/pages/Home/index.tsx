@@ -26,7 +26,7 @@ const Home = () => {
 	const [selectedMin, setSelectedMin] = useLocalStorage('selectedMin', overAllMin);
 	const [selectedMax, setSelectedMax] = useLocalStorage('selectedMax', overAllMax);
 	const [isResultSelected, setIsResultSelected] = useState(false);
-	const [count, setCount] = useLocalStorage('count',0);
+	const [count, setCount] = useLocalStorage('count','none selected');
 
 
 
@@ -45,8 +45,13 @@ const Home = () => {
 			changeCheckedAmenities
 		);
 		const count = changeCheckedAmenities.filter((item:any) => 	item.checked === true);
-
-		setCount(count.length);
+		if (count.length === 0) {
+			console.log('FDSFDS');
+			setCount('none selected');
+		} else {
+			setCount(`${count.length} selected`);
+		}
+		
 	};
 
 	
