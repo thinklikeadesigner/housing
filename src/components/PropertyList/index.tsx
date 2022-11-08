@@ -4,7 +4,15 @@ import UnitList from '../UnitList';
 
 const PropertyList = ( { properties, children}: any ) => {
 
-	if (properties.length == 0) return <NoResults />;
+	if (properties.length == 0) {
+		return (
+			<>
+				<NoResults />;
+				{children}
+			</>
+		);
+	}
+	
 
 	
 

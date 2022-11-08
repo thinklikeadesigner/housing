@@ -66,7 +66,7 @@ const RangeInput: FC<RangeInputProps> = ({
 	}, [minVal, maxVal]);
   
 	return (
-		<div className="pr-8">
+		<div className="py-8">
 			<input
 				type="range"
 				min={min}

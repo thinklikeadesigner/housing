@@ -21,8 +21,8 @@ const Home = () => {
 	const [currentPage, setCurrentPage] = useLocalStorage('currentPage', 1);
 	const [propertiesPerPage, setPropertiesPerPage] = useLocalStorage('propertiesPerPage', 10);
 	const [searchInput, setSearchInput] = useState('');
-	const [selectedMin, setSelectedMin] = useState(1);
-	const [selectedMax, setSelectedMax] = useState(14);
+	const [selectedMin, setSelectedMin] = useLocalStorage('selectedMin', 1);
+	const [selectedMax, setSelectedMax] = useLocalStorage('selectedMax', 14);
 
 	const getMin = ((min: any) => {
 		setSelectedMin(min);
@@ -73,7 +73,7 @@ const Home = () => {
 		
 		if (amenityChecked.length !== 0) {
 			
-			const reduceArr: any[] = [];
+			const amenityArr: any[] = [];
 			updatedPropertyList.reduce((prev: any, current: any) => {
 				
 				const filteredUnits = current.units.filter((unit: any) => unitHasAmenities(getUnitAmenities(unit), amenityChecked));
@@ -81,29 +81,29 @@ const Home = () => {
 					
 					const filteredProperty = current.units.filter((unit: any) => unitHasAmenities(getUnitAmenities(unit), amenityChecked));
 					current.units = filteredProperty;
-					reduceArr.push(current);
+					amenityArr.push(current);
 					
 				}
-			}, reduceArr);
+			}, amenityArr);
 
 					
-			updatedPropertyList = reduceArr;
+			updatedPropertyList = amenityArr;
 		}
 		const minRange = selectedMin;
 		const maxRange = selectedMax;
-		const anotherArr: any[] = [];
+		const rangeArr: any[] = [];
 
 		updatedPropertyList.reduce((prev: any, current: any) => {
 
-			const filtered = current.units.map((unit: any) => isUnitInRange(unitRange(unit), [minRange, maxRange]));
+			const filtered = current.units.filter((unit: any) => isUnitInRange(unitRange(unit), [minRange, maxRange]));
 			if (filtered.length) {
 				const filteredUnits = current.units.filter((unit: any) => isUnitInRange(unitRange(unit), [minRange, maxRange]));
 				current.units = filteredUnits;
-				anotherArr.push(current);
+				rangeArr.push(current);
 			}
-		}, anotherArr
+		}, rangeArr
 		);
-		updatedPropertyList = anotherArr;
+		updatedPropertyList = rangeArr;
 
 		if (searchInput) {
 			updatedPropertyList = updatedPropertyList.filter(
@@ -116,6 +116,7 @@ const Home = () => {
 		setProperties(updatedPropertyList);
 	};
 
+
 	useEffect(() => {
 		applyFilters();
 	}, [amenities, searchInput, selectedMin, selectedMax]);
@@ -124,9 +125,9 @@ const Home = () => {
 	return <div className="flex flex-col">
 		<FilterPanel>
 			<SearchBar value={searchInput} changeInput={handleChangeInput} />
-			<div className="mr-10"></div>
+			<div className="lg:mr-10"></div>
 			<RangeInput getMin={getMin} getMax={getMax} min={1} max={14} />
-			<div className="mr-10"></div>
+			<div className="lg:mr-10"></div>
 			<DropDownContainer title={'Amenities'} >
 				<AmenityMenu amenities={amenities} updateCheckStatus={updateCheckStatus} />
 			</DropDownContainer>

@@ -18,7 +18,7 @@ const Dropdown = ({ trigger, menu }: any) => {
 	};
 
 	return (
-		<div className="relative w-full text-lg">
+		<div className="relative w-full py-8 text-lg">
 			{cloneElement(trigger, {
 				onClick: handleOpen,
 			})}
