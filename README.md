@@ -1,6 +1,7 @@
 [Live site url](https://6369a8dbb5885740fe38ccf7--stupendous-babka-e916ef.netlify.app/.)
 
 ### A few notes:
+- amenities checkboxes are taken dynamically from the data, so are the numbers for the range of occupants
 - I've incorporated the design from the new assignment into the original project with the filters and pagination, the data is from the original assignment.
 - You'll notice I've added some unit tests for the filter features in unit.test.ts with Jest.
 
