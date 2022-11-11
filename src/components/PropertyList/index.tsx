@@ -16,7 +16,7 @@ const PropertyList = ( { properties, children}: any ) => {
 
 	
 
-	return <div className="py-6">
+	return <div className="pb-6">
 		{properties.map((i: any) => (
 			<div  className="flex justify-center py-6" key={i.id}>
 				<div className="overflow-hidden bg-white rounded">
