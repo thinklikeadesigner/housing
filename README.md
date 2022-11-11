@@ -1,4 +1,4 @@
-[Live site url](https://6369a8dbb5885740fe38ccf7--stupendous-babka-e916ef.netlify.app/.)
+[Live site url](https://stupendous-babka-e916ef.netlify.app/)
 
 ### A few notes:
 - amenities checkboxes are taken dynamically from the data, so are the numbers for the range of occupants
