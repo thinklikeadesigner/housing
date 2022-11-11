@@ -46,7 +46,6 @@ const Home = () => {
 		);
 		const count = changeCheckedAmenities.filter((item:any) => 	item.checked === true);
 		if (count.length === 0) {
-			console.log('FDSFDS');
 			setCount('none selected');
 		} else {
 			setCount(`${count.length} selected`);

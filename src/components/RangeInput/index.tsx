@@ -65,6 +65,10 @@ const RangeInput: FC<RangeInputProps> = ({
 		getMax(maxVal);
 	}, [minVal, maxVal]);
   
+	// BUG menu won't close if you click outside the menu beside the button
+	// BUG menu button size changes with amenities number
+	
+
 	return (
 		<><h1 className="text-lg text-left">Occupants Range</h1>
 			<div className="flex items-center justify-start md:py-8">
