@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import NoResults from '../NoResults/index';
 import UnitList from '../UnitList';
+import { IProperty } from '../helpers/index';
 
-const PropertyList = ( { properties, children}: any ) => {
+interface Props {
+	children: ReactNode;
+	properties: IProperty[];
+}
+
+const PropertyList = ( { properties, children}: Props ) => {
 
 	if (properties.length == 0) {
 		return (

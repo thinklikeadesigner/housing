@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-key */
-import React, { cloneElement, useState, useEffect } from 'react';
+import React, { ReactNode, useState, useEffect, EventHandler, Ref } from 'react';
 import './styles.css';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 
 type DropDownProps = {
-	children: any;
+	children: ReactNode;
 	count?: number;
 	title: string;
 	isResultSelected?: boolean;
@@ -16,10 +16,10 @@ const DropDownContainer = ({ children, count, title, isResultSelected }: DropDow
 		setOpen(false);
 	};
 	
-	const ref:any = useOutsideClick(handleClickOutside);
+	const ref:React.MutableRefObject<any> = useOutsideClick(handleClickOutside);
 
 
-	const handleHeaderClick = (event:any) => {
+	const handleHeaderClick = (event:React.BaseSyntheticEvent) => {
 		// do something
 
 		event.stopPropagation();

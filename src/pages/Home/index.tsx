@@ -161,7 +161,7 @@ const Home = () => {
 			</DropDownContainer>
 		</FilterPanel>
 		<Pagination checkIfEmpty={checkIfEmpty} propertiesPerPage={propertiesPerPage} currentPage={currentPage} totalProperties={properties.length} paginate={paginate}/>
-		<PropertyList properties={currentProperties} amenities={amenities} >
+		<PropertyList properties={currentProperties} >
 			<Pagination checkIfEmpty={checkIfEmpty} propertiesPerPage={propertiesPerPage} currentPage={currentPage} totalProperties={properties.length} paginate={paginate}/>
 		</PropertyList>
 	</div>;
