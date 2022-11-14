@@ -1,10 +1,17 @@
 import React from 'react';
 import CheckBox from '../CheckBox';
+import { IAmenityCheckbox } from '../helpers';
+
+type amenitiesProps = {
+	amenities: IAmenityCheckbox[],
+	updateCheckStatus: (i: number) => void;
+}
 
 
-export const AmenityMenu = ({amenities, updateCheckStatus}: any) => {
+
+export const AmenityMenu = ({amenities, updateCheckStatus}: amenitiesProps) => {
 	return<div className="p-2">
-		{amenities.map((amenity: any, index: any) => (
+		{amenities.map((amenity: IAmenityCheckbox, index) => (
 			<CheckBox
 				
 				key={index}

@@ -1,10 +1,10 @@
 import React from 'react';
 
 type Props = {
-    index: any; 
-    label: any; 
-    isChecked: any;
-    checkHandler: any;
+    index: number; 
+    label: string; 
+    isChecked: boolean;
+    checkHandler: () => void;
 };
 
 const CheckBox = ({ isChecked, label, checkHandler, index }: Props) => {

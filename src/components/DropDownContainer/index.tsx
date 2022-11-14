@@ -3,8 +3,14 @@ import React, { cloneElement, useState, useEffect } from 'react';
 import './styles.css';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 
+type DropDownProps = {
+	children: any;
+	count?: number;
+	title: string;
+	isResultSelected?: boolean;
+}
 	
-const DropDownContainer = ({ children, count, title, isResultSelected }: any) => {
+const DropDownContainer = ({ children, count, title, isResultSelected }: DropDownProps) => {
 	const [open, setOpen] = useState(false);
 	const handleClickOutside = () => {
 		setOpen(false);

@@ -1,18 +1,19 @@
 import React from 'react';
-import { getAvgSqft, getUnitsByType, getUnitsMinMax, noUnitsAvailable } from '../helpers';
+import { getAvgSqft, getUnitsByType, getUnitsMinMax, IUnit, noUnitsAvailable } from '../helpers';
 import './styles.css';
+import { IProperty } from '../helpers/index';
 
 
-function UnitList(units: any) {
-	const studioArr = getUnitsByType(units, 'studio');
-	const oneBdrmArr = getUnitsByType(units, 'oneBdrm');
-	const twoBdrmArr = getUnitsByType(units, 'twoBdrm');
-	const threeBdrmArr = getUnitsByType(units, 'threeBdrm');
-	const fourBdrmArr = getUnitsByType(units, 'fourBdrm');
+function UnitList(property: IProperty) {
+	const studioArr = getUnitsByType(property, 'studio');
+	const oneBdrmArr = getUnitsByType(property, 'oneBdrm');
+	const twoBdrmArr = getUnitsByType(property, 'twoBdrm');
+	const threeBdrmArr = getUnitsByType(property, 'threeBdrm');
+	const fourBdrmArr = getUnitsByType(property, 'fourBdrm');
 
 
 
-	function tableRow(unitArr: [], type: string): React.ReactNode {
+	function tableRow(unitArr: IUnit[], type: string): React.ReactNode {
 		return noUnitsAvailable(unitArr) ? null : <tr className="h-10 even:bg-gray-100 odd:bg-white">
 			<td className="text-sm font-normal leading-5 text-center md:py-2">
 				<h4>{type}</h4>
