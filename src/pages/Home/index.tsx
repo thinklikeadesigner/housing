@@ -8,7 +8,7 @@ import { PropertyContext } from '../../context/PropertyContext/index';
 import ResultsCount from '../../components/ResultsCount/index';
 import FilterPanel from '../../components/FilterPanel';
 import RangeInput from '../../components/RangeInput/index';
-import { alphaSort, getAmenities, getOverallMinMax, getUnitAmenities, isUnitInRange, unitHasAmenities, unitRange } from '../../components/helpers';
+import { alphaSort, getAmenities, getOverallMinMax, getUnitAmenities, isUnitInRange, IUnit, unitHasAmenities, unitRange } from '../../components/helpers';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 
@@ -99,7 +99,7 @@ const Home = () => {
 			const amenityArr: any[] = [];
 			updatedPropertyList.reduce((prev: any, current: any) => {
 				
-				const filteredUnits = current.units.filter((unit: any) => unitHasAmenities(getUnitAmenities(unit), amenityChecked));
+				const filteredUnits = current.units.filter((unit: IUnit) => unitHasAmenities(getUnitAmenities(unit), amenityChecked));
 				if (filteredUnits.length) {
 					
 					const filteredProperty = current.units.filter((unit: any) => unitHasAmenities(getUnitAmenities(unit), amenityChecked));
