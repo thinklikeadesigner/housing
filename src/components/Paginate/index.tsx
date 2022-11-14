@@ -3,7 +3,17 @@ import left from '../../left-arrow.png';
 import right from '../../right-arrow.png';
 import DropDownContainer from '../DropDownContainer';
 import ResultsCount from '../ResultsCount';
-export const Pagination = ({checkIfEmpty,isResultSelected, handleResultsPerPage, propertiesPerPage, currentPage, totalProperties, paginate, children}: any) => {
+
+
+type PaginationProps = {
+	checkIfEmpty: () => void;
+	propertiesPerPage: number;
+	currentPage: number;
+	totalProperties: number;
+	paginate: (i: number) => void;
+}
+
+export const Pagination = ({checkIfEmpty, propertiesPerPage, currentPage, totalProperties, paginate}: PaginationProps) => {
 	
 	const pageNumbers = [];
 	for (let i = 1; i <= Math.ceil(totalProperties / propertiesPerPage); i++) {
@@ -36,7 +46,6 @@ export const Pagination = ({checkIfEmpty,isResultSelected, handleResultsPerPage,
 			</ul>
 
 		</nav>
-		{children}
 	</section>
 	;
 };

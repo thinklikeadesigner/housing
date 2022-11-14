@@ -72,7 +72,7 @@ const RangeInput: FC<RangeInputProps> = ({
 	return (
 		<>
 			<div className="flex items-center justify-start py-8">
-				<div className="pr-4"><h1 className="text-lg text-left ">Range:</h1></div>
+				{/* <div className="pr-4"><h1 className="text-lg text-left ">Range:</h1></div> */}
 				<p className="pr-2 m-0 text-xs text-center md:pr-8 md:text-lg">min</p>
 				<div className="py-8">
 					<input
