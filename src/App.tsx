@@ -9,7 +9,7 @@ function App() {
 
 	
 
-	const [properties, setProperties] = useState<any>(() => alphaSort(data));
+	const [properties, setProperties] = useState<IProperty[]>(() => alphaSort(data));
 	
 
 	return (

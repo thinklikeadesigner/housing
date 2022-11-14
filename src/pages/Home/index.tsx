@@ -10,12 +10,13 @@ import FilterPanel from '../../components/FilterPanel';
 import RangeInput from '../../components/RangeInput/index';
 import { alphaSort, getAmenities, getOverallMinMax, getUnitAmenities, isUnitInRange, IUnit, unitHasAmenities, unitRange } from '../../components/helpers';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { IProperty } from '../../components/helpers/index';
 
 
 
 
 const Home = () => {
-	const propertyList = useContext<any>(PropertyContext);
+	const propertyList = useContext<IProperty[]>(PropertyContext);
 	const overAllMin = getOverallMinMax(propertyList)[0];
 	const overAllMax = getOverallMinMax(propertyList)[1];
 	const [amenities, setAmenities] = useLocalStorage('amenities', getAmenities(propertyList));
