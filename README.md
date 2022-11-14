@@ -16,6 +16,3 @@
 
 ### amenities
 ![ezgif com-gif-maker (4)](https://user-images.githubusercontent.com/58955802/200454523-22d7ee46-0b83-436c-b717-e2b41a90399a.gif)
-
-### Responsive
-![70rqxn](https://user-images.githubusercontent.com/58955802/201782126-b18f9232-0729-4ac3-9dc9-fd93ce3b8a71.gif)
