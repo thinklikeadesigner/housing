@@ -1,6 +1,6 @@
 import React from 'react';
+import { IAmenityCheckbox } from '../../types';
 import CheckBox from '../CheckBox';
-import { IAmenityCheckbox } from '../helpers';
 
 type amenitiesProps = {
 	amenities: IAmenityCheckbox[],
