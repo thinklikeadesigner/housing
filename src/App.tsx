@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import data from './mockData.json';
+import newData from './newfile';
 import { PropertyContext } from './context/PropertyContext/index';
 import Home from './pages/Home';
 import { alphaSort } from './components/helpers/index';
 import { IProperty } from './types';
 
+console.log(newData);
 
 function App() {
 
 	
 
-	const [properties, setProperties] = useState<IProperty[]>(() => alphaSort(data));
+	const [properties, setProperties] = useState<IProperty[]>(() => alphaSort(newData));
 	
 
 	return (
