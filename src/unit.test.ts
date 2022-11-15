@@ -4,7 +4,7 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
 import mockData from './mockData.json';
-import { getUnitsByType, getUnitsMinMax, getAvgSqft, unitHasAmenities, getUnitAmenities, unitRange, isUnitInRange } from './components/helpers';
+import { getUnitsByType, getUnitsMinMax, getAvgSqft, unitHasAmenities, getUnitAmenities, unitRange, isUnitInRange, IUnit } from './components/helpers';
 
 
 // jest --watch --collect-coverage
@@ -199,7 +199,6 @@ describe('filter amenities by unit', () => {
 		};
 
 		const answer = unitHasAmenities(getUnitAmenities(unit), amenitychecked);
-
 		expect(answer).toBeTruthy();
 	});
 	test('should return true because amenities checked are an exact match', () => {
@@ -278,7 +277,7 @@ describe('filter amenities by unit', () => {
 			]
 		};
 
-		const filtered = studios.filter((studio: any) => unitHasAmenities(getUnitAmenities(studio), amenitychecked));
+		const filtered = studios.filter((studio: IUnit) => unitHasAmenities(getUnitAmenities(studio), amenitychecked));
 
 		expect(filtered.length).toBe(4);
 	});
@@ -326,13 +325,6 @@ describe('filter range by unit', () => {
 				'washer & dryer',
 			]
 		};
-		const isUnitInRange = (unitRange: any, range: any) => {
-			if (range[0] <= unitRange[0] && range[1] >= unitRange[1]) {
-
-				return true;
-			}
-			return false;
-		};
 
 		expect(isUnitInRange(unitRange(unit), [1,6])).toBeTruthy();
 
@@ -352,12 +344,6 @@ describe('filter range by unit', () => {
 				'wheel chair access',
 				'washer & dryer',
 			]
-		};
-		const isUnitInRange = (unitRange: any, range: any) => {
-			if (range[0] <= unitRange[0] && range[1] >= unitRange[1]) {
-				return true;
-			}
-			return false;
 		};
 
 		expect(isUnitInRange(unitRange(unit), [1,2])).toBeFalsy();
@@ -379,12 +365,6 @@ describe('filter range by unit', () => {
 				'washer & dryer',
 			]
 		};
-		const isUnitInRange = (unitRange: any, range: any) => {
-			if (range[0] <= unitRange[0] && range[1] >= unitRange[1]) {
-				return true;
-			}
-			return false;
-		};
 
 		expect(isUnitInRange(unitRange(unit), [3,4])).toBeFalsy();
 
@@ -405,12 +385,6 @@ describe('filter range by unit', () => {
 				'wheel chair access',
 				'washer & dryer',
 			]
-		};
-		const isUnitInRange = (unitRange: any, range: any) => {
-			if (range[0] <= unitRange[0] && range[1] >= unitRange[1]) {
-				return true;
-			}
-			return false;
 		};
 
 		expect(isUnitInRange(unitRange(unit), [1,4])).toBeTruthy();
@@ -460,7 +434,7 @@ describe('filter range by unit', () => {
 			]
 		}];
 
-		const filtered = units.filter((unit: any) => isUnitInRange(unitRange(unit), [1,20]));
+		const filtered = units.filter((unit: IUnit) => isUnitInRange(unitRange(unit), [1,20]));
 
 		expect(filtered.length).toBe(3);
 	});
@@ -508,7 +482,7 @@ describe('filter range by unit', () => {
 			]
 		}];
 
-		const filtered = units.filter((unit: any) => isUnitInRange(unitRange(unit), [1,7]));
+		const filtered = units.filter((unit: IUnit) => isUnitInRange(unitRange(unit), [1,7]));
 
 		expect(filtered.length).toBe(2);
 	});
@@ -556,7 +530,7 @@ describe('filter range by unit', () => {
 			]
 		}];
 
-		const filtered = units.filter((unit: any) => isUnitInRange(unitRange(unit), [3,10]));
+		const filtered = units.filter((unit: IUnit) => isUnitInRange(unitRange(unit), [3,10]));
 
 		expect(filtered.length).toBe(1);
 	});
@@ -564,7 +538,7 @@ describe('filter range by unit', () => {
 
 describe('getting overall max and min for range slider', () => {
 	test('should get max and min from all units', () => {
-		const a = data.map((i: { units: any[]; }) => i.units.map(i => i)).flat().flat();
+		const a = data.map((i: { units: IUnit[]; }) => i.units.map(i => i)).flat().flat();
 		expect(getUnitsMinMax(a)).toEqual([1,13]);
 	});
 });

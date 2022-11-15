@@ -32,7 +32,7 @@ export const getAmenities = (housingdata: IProperty[]) => {
 	return amenitiesCheckBoxes;
 };
 
-export const unitHasAmenities = (amenitiesArray:any, chosenAmenities: any) => chosenAmenities.every((i: any) => amenitiesArray.includes(i));
+export const unitHasAmenities = (amenitiesArray:string[], chosenAmenities: string[]) => chosenAmenities.every((i: string) => amenitiesArray.includes(i));
 export const getUnitAmenities = (unit: IUnit) => unit.amenities.map((i) => i);
 
 export const getUnitsByType = (property: IProperty, unitType: string) => {
@@ -64,7 +64,7 @@ export const unitRange = (unit: IUnit) => {
 	return [unit.minOccupancy, unit.maxOccupancy];
 };
 
-export const isUnitInRange = (unitRange: any, range: any) => {
+export const isUnitInRange = (unitRange: number[], range: number[]) => {
 	if (range[0] <= unitRange[0] && range[1] >= unitRange[1]) {
 		return true;
 	}

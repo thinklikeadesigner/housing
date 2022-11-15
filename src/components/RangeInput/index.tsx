@@ -12,8 +12,8 @@ import './styles.css';
   interface RangeInputProps {
     min: number;
     max: number;
-	getMin: any;
-	getMax: any;
+	getMin: (num: number) => void;
+	getMax:  (num: number) => void;
   }
   
 const RangeInput: FC<RangeInputProps> = ({

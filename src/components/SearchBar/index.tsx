@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { ChangeEventHandler } from 'react';
 type Props = {
-  value: any;
-  changeInput: any;
+  value: string;
+  changeInput: ChangeEventHandler<HTMLInputElement>;
 };
 
 const SearchBar = ({ value, changeInput }: Props) => {

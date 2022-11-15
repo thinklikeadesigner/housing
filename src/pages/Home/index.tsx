@@ -8,9 +8,8 @@ import { PropertyContext } from '../../context/PropertyContext/index';
 import ResultsCount from '../../components/ResultsCount/index';
 import FilterPanel from '../../components/FilterPanel';
 import RangeInput from '../../components/RangeInput/index';
-import { alphaSort, getAmenities, getOverallMinMax, getUnitAmenities, isUnitInRange, IUnit, unitHasAmenities, unitRange } from '../../components/helpers';
+import { alphaSort, getAmenities,IProperty, IAmenityCheckbox, getOverallMinMax, getUnitAmenities, isUnitInRange, IUnit, unitHasAmenities, unitRange } from '../../components/helpers';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
-import { IProperty } from '../../components/helpers/index';
 
 
 
@@ -31,21 +30,21 @@ const Home = () => {
 
 
 
-	const getMin = ((min: any) => {
+	const getMin = ((min: number) => {
 		setSelectedMin(min);
 	});
-	const getMax = ((max: any) => {
+	const getMax = ((max: number) => {
 		setSelectedMax(max);
 	});
 
 	const updateCheckStatus = (index: number) => {
 		const amenitiesStateList = amenities;
-		const changeCheckedAmenities = amenitiesStateList.map((amenity: any, currentIndex: any) => currentIndex === index ? { ...amenity, checked: !amenity.checked } : amenity
+		const changeCheckedAmenities = amenitiesStateList.map((amenity: IAmenityCheckbox, currentIndex: number) => currentIndex === index ? { ...amenity, checked: !amenity.checked } : amenity
 		);
 		setAmenities(
 			changeCheckedAmenities
 		);
-		const count = changeCheckedAmenities.filter((item:any) => 	item.checked === true);
+		const count = changeCheckedAmenities.filter((item:IAmenityCheckbox) => 	item.checked === true);
 		if (count.length === 0) {
 			setCount('none selected');
 		} else {
@@ -70,16 +69,16 @@ const Home = () => {
 
 
 	// for text search
-	const handleChangeInput = (_e: { target: { value: any } }) => setSearchInput(_e.target.value);
+	const handleChangeInput = (_e: { target: { value: string } }) => setSearchInput(_e.target.value);
 
 
 	// change page
-	const paginate = (pageNumber: any) => {
+	const paginate = (pageNumber: number) => {
 		setCurrentPage(pageNumber);
 	};
 
 	// results per page
-	const handleResultsPerPage = (num: any) => {
+	const handleResultsPerPage = (num: number) => {
 		setPropertiesPerPage(num);   // get current properties
 		setIsResultSelected(true);
 	};
@@ -93,17 +92,17 @@ const Home = () => {
 		const unmutatedPropertyList = JSON.stringify(propertyList);
 		let updatedPropertyList = JSON.parse(unmutatedPropertyList);
 		
-		const amenityChecked = amenities.filter((item: any) => item.checked).map((item: any) => item.name.toLowerCase());
-		
+		const amenityChecked = amenities.filter((item: IAmenityCheckbox) => item.checked).map((item: IAmenityCheckbox) => item.name.toLowerCase());
+
 		if (amenityChecked.length !== 0) {
 			
-			const amenityArr: any[] = [];
-			updatedPropertyList.reduce((prev: any, current: any) => {
+			const amenityArr: IProperty[] = [];
+			updatedPropertyList.reduce((prev: IProperty, current: IProperty) => {
 				
 				const filteredUnits = current.units.filter((unit: IUnit) => unitHasAmenities(getUnitAmenities(unit), amenityChecked));
 				if (filteredUnits.length) {
 					
-					const filteredProperty = current.units.filter((unit: any) => unitHasAmenities(getUnitAmenities(unit), amenityChecked));
+					const filteredProperty = current.units.filter((unit: IUnit) => unitHasAmenities(getUnitAmenities(unit), amenityChecked));
 					current.units = filteredProperty;
 					amenityArr.push(current);
 					
@@ -115,13 +114,13 @@ const Home = () => {
 		}
 		const minRange = selectedMin;
 		const maxRange = selectedMax;
-		const rangeArr: any[] = [];
+		const rangeArr: IProperty[] = [];
 
-		updatedPropertyList.reduce((prev: any, current: any) => {
+		updatedPropertyList.reduce((prev: IProperty, current: IProperty) => {
 
-			const filtered = current.units.filter((unit: any) => isUnitInRange(unitRange(unit), [minRange, maxRange]));
+			const filtered = current.units.filter((unit: IUnit) => isUnitInRange(unitRange(unit), [minRange, maxRange]));
 			if (filtered.length) {
-				const filteredUnits = current.units.filter((unit: any) => isUnitInRange(unitRange(unit), [minRange, maxRange]));
+				const filteredUnits = current.units.filter((unit: IUnit) => isUnitInRange(unitRange(unit), [minRange, maxRange]));
 				current.units = filteredUnits;
 				rangeArr.push(current);
 			}
@@ -131,7 +130,7 @@ const Home = () => {
 
 		if (searchInput) {
 			updatedPropertyList = updatedPropertyList.filter(
-				(item:any) => item.name.toLowerCase().search(searchInput.toLowerCase().trim()) !== -1
+				(item:IProperty) => item.name.toLowerCase().search(searchInput.toLowerCase().trim()) !== -1
 			);
 		}
 
