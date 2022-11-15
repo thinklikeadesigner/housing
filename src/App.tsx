@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import data from './mockData.json';
 import { PropertyContext } from './context/PropertyContext/index';
 import Home from './pages/Home';
-import { alphaSort, IProperty } from './components/helpers/index';
+import { alphaSort } from './components/helpers/index';
+import { IProperty } from './types';
 
 
 function App() {

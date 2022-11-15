@@ -1,23 +1,4 @@
-
-export interface IProperty {
-	id: string
-	name: string
-	picture: string
-	units: IUnit[]
-}
-		
-export interface IUnit {
-			type: string
-			minOccupancy: number
-			maxOccupancy: number
-			sqft: number
-			amenities: string[]
-}
-
-export interface IAmenityCheckbox {
-	checked: boolean;
-	name: string;
-}
+import { IAmenityCheckbox, IProperty, IUnit } from '../../types';
 
 export const alphaSort = (data: IProperty[]) => {
 	return data.sort((a: IProperty, b: IProperty) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
@@ -32,7 +13,7 @@ export const getAmenities = (housingdata: IProperty[]) => {
 	return amenitiesCheckBoxes;
 };
 
-export const unitHasAmenities = (amenitiesArray:string[], chosenAmenities: string[]) => chosenAmenities.every((i: string) => amenitiesArray.includes(i));
+export const unitHasAmenities = (amenitiesArray: string[], chosenAmenities: string[]) => chosenAmenities.every((i: string) => amenitiesArray.includes(i));
 export const getUnitAmenities = (unit: IUnit) => unit.amenities.map((i) => i);
 
 export const getUnitsByType = (property: IProperty, unitType: string) => {

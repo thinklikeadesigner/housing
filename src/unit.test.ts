@@ -4,7 +4,8 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
 import mockData from './mockData.json';
-import { getUnitsByType, getUnitsMinMax, getAvgSqft, unitHasAmenities, getUnitAmenities, unitRange, isUnitInRange, IUnit } from './components/helpers';
+import { getUnitsByType, getUnitsMinMax, getAvgSqft, unitHasAmenities, getUnitAmenities, unitRange, isUnitInRange } from './components/helpers';
+import { IUnit } from './types';
 
 
 // jest --watch --collect-coverage

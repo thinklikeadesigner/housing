@@ -1,7 +1,7 @@
 import React from 'react';
-import { getAvgSqft, getUnitsByType, getUnitsMinMax, IUnit, noUnitsAvailable } from '../helpers';
+import { IProperty, IUnit } from '../../types';
+import { getAvgSqft, getUnitsByType, getUnitsMinMax, noUnitsAvailable } from '../helpers';
 import './styles.css';
-import { IProperty } from '../helpers/index';
 
 
 function UnitList(property: IProperty) {

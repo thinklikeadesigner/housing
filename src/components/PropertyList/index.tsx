@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
+import { IProperty } from '../../types';
 import NoResults from '../NoResults/index';
 import UnitList from '../UnitList';
-import { IProperty } from '../helpers/index';
 
 interface Props {
 	children: ReactNode;

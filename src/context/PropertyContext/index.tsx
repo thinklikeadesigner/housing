@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { IProperty } from '../../components/helpers';
+import { IProperty } from '../../types';
 
 
 
