@@ -29,8 +29,8 @@ function UnitList(property: IProperty) {
 		</tr>;
 	}
 
-	return <div className="overflow-x-hidden font-sansh-96">
-		<table className="w-full h-full text-black table-auto" >
+	return <div className="overflow-x-hidden font-sans ">
+		<table className="w-full text-black table-auto" >
 			<thead >
 				<tr className="h-8 bg-gray-200 mb-9">
 					<th className="text-xs font-semibold leading-4 w-28">Unit Type</th>
