@@ -4,6 +4,7 @@
 - amenities checkboxes are taken dynamically from the data, so are the numbers for the range of occupants
 - I've incorporated the design from the new assignment into the original project with the filters and pagination, the data is from the original assignment.
 - You'll notice I've added some unit tests for the filter features in unit.test.ts with Jest.
+- I've added some house pictures from unsplashed for variety's sake
 
 ### pagination
 ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/58955802/200453735-cedc12eb-6094-4546-aca5-5f0f8fbca386.gif)
