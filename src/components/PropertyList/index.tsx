@@ -39,12 +39,12 @@ const PropertyList = ( { properties, children}: Props ) => {
 						</div>
 						<div className="flex flex-col py-5 md:pl-8 md:w-1/2 md:py-0">
 							<h2 className="mb-3 text-3xl font-semibold tracking-wide text-blue-500 uppercase">{i.name}</h2>
-							<p className="mb-4 ">Street Address, Local City ST 12345</p>
-							<div className="pb-4">
+							<p className="mb-3 ">Street Address, Local City ST 12345</p>
+							<div className="pb-5">
 								<button className="px-4 py-2 mr-2 text-white bg-blue-500 rounded hover:bg-blue-400">Listing Label</button>
 								<button className="px-4 py-2 mr-2 text-white bg-blue-500 rounded hover:bg-blue-400">Listing Label</button>
 							</div>
-							<div className="pt-5 pb-1 border-t border-gray-600"></div>
+							<div className="pt-4 pb-1 border-t border-gray-600"></div>
 							<UnitList id={i.id} name={i.name} picture={i.picture} units={i.units} />
 						</div>
 					</div>

@@ -15,7 +15,7 @@ function UnitList(property: IProperty) {
 
 	function tableRow(unitArr: IUnit[], type: string): React.ReactNode {
 		return noUnitsAvailable(unitArr) ? null : <tr className="h-10 even:bg-gray-100 odd:bg-white">
-			<td className="text-sm font-normal leading-5 text-center md:py-2">
+			<td className="font-sans text-sm font-normal leading-5 text-center md:py-2">
 				<h4>{type}</h4>
 			</td>
 			<td className="text-sm font-normal leading-5 text-center md:py-2">  <p>
@@ -29,7 +29,7 @@ function UnitList(property: IProperty) {
 		</tr>;
 	}
 
-	return <div className="overflow-x-hidden">
+	return <div className="overflow-x-hidden font-sans ">
 		<table className="w-full text-black table-auto" >
 			<thead >
 				<tr className="h-8 bg-gray-200 mb-9">
@@ -40,10 +40,10 @@ function UnitList(property: IProperty) {
 			</thead>
 			<tbody  >
 				{tableRow(studioArr, 'Studio')}
-				{tableRow(oneBdrmArr, 'One Bedroom')}
-				{tableRow(twoBdrmArr, 'Two Bedroom')}
-				{tableRow(threeBdrmArr, 'Three Bedroom')}
-				{tableRow(fourBdrmArr, 'Four Bedroom')}
+				{tableRow(oneBdrmArr, '1 BR')}
+				{tableRow(twoBdrmArr, '2 BR')}
+				{tableRow(threeBdrmArr, '3 BR')}
+				{tableRow(fourBdrmArr, '4 BR')}
 			</tbody>
 		</table>
 	</div>;

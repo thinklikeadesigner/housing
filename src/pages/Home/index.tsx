@@ -147,7 +147,7 @@ const Home = () => {
 	}, [amenities, searchInput, selectedMin, selectedMax, isResultSelected, count]);
     
 
-	return <div className="flex flex-col">
+	return <div className="flex flex-col font-body">
 		<FilterPanel>
 			<SearchBar value={searchInput} changeInput={handleChangeInput} />
 			<div className="lg:mr-10"></div>
