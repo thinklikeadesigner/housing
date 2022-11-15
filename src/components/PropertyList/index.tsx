@@ -37,7 +37,7 @@ const PropertyList = ( { properties, children}: Props ) => {
 								<div className="p-4 text-sm font-normal leading-4 text-white bg-blue-500"><p className="self-center\">Application Deadline: April 21st, 2023</p></div>
 							</div>
 						</div>
-						<div className="flex flex-col py-4 md:pl-8 md:w-1/2 md:py-0">
+						<div className="flex flex-col py-5 md:pl-8 md:w-1/2 md:py-0">
 							<h2 className="mb-3 text-3xl font-semibold tracking-wide text-blue-500 uppercase">{i.name}</h2>
 							<p className="mb-4 ">Street Address, Local City ST 12345</p>
 							<div className="pb-4">
