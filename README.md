@@ -1,5 +1,14 @@
 [Live site url](https://stupendous-babka-e916ef.netlify.app/)
 
+### Getting Started
+``` git clone https://github.com/thinklikeadesigner/housing.git ```
+
+``` cd housing ```
+
+``` npm install ```
+
+``` npm start ```
+
 ### A few notes:
 - amenities checkboxes are taken dynamically from the data, so are the numbers for the range of occupants
 - I've incorporated the design from the new assignment into the original project with the filters and pagination, the data is from the original assignment.
